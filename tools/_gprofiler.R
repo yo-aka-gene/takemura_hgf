@@ -16,7 +16,8 @@ egost <- function(
     organism="hsapiens",
     correction_method="fdr", 
     user_threshold=0.05, 
-    domain_scope="annotated"
+    domain_scope="annotated",
+    sources="GO"
 ){
     stopifnot(is.vector(gene))
     stopifnot(is.character(gene))
@@ -29,7 +30,8 @@ egost <- function(
             organism=organism,
             correction_method=correction_method,
             user_threshold=user_threshold,
-            domain_scope=domain_scope
+            domain_scope=domain_scope,
+            sources=sources
         )
     )
 }
