@@ -1,15 +1,16 @@
 import matplotlib.pyplot as plt
+from matplotlib_venn import venn2
 import numpy as np
 import pandas as pd
 import seaborn as sns
 from sklearn.decomposition import PCA
-from ._cohens_d import cohens_d
+from ._cohens_d import cohens_d, gene_selection
 from ._data_loader import SuematsuData
 from ._preference import kwarg_savefig
 
 
 class EDA:
-    def __init__(self, data: SuematsuData, out: str = "home/jovyan/out") -> None:
+    def __init__(self, data: SuematsuData, out: str = "/home/jovyan/out") -> None:
         self.data = data
         self.model= PCA(random_state=0)
         self.pca = pd.DataFrame(
@@ -119,7 +120,7 @@ class EDA:
             ylabel=f"PC{dim_idx + idx_starts_with} components", 
             xlabel="Cohen's d",
             title=' vs '.join([
-                v for v in self.data.groupby(self.group).count().filter(axis=0, regex=regex).index
+                v for v in self.data.data.groupby(self.data.group).count().filter(axis=0, regex=regex).index
             ])
         )
         ax.legend()
@@ -148,3 +149,38 @@ class EDA:
             ) for day, a in zip([2, 7], ax)
         ]
         fig.savefig(f"{self.out}/regulation_plot.png", **kwarg_savefig)
+
+
+    def gr_venn(
+        self,
+        set_labels: tuple,
+        ax: plt.Axes = None,
+        d: float = .8,
+        neg: bool = False,
+        set_colors: tuple = ("C0", "C2", "C1")
+    ) -> None:
+        if ax is None:
+            _, ax = plt.subplots()
+        a_genes = gene_selection(self.data.data, self.data.group, regex=set_labels[0], d=d, neg=neg).index
+        b_genes = gene_selection(self.data.data, self.data.group, regex=set_labels[1], d=d, neg=neg).index
+        n_intersection = len([v for v in a_genes if v in b_genes])
+        v = venn2(
+            subsets=(len(a_genes) - n_intersection, len(b_genes) - n_intersection, n_intersection),
+            set_labels = set_labels,
+            ax=ax
+        )
+        [v.get_patch_by_id(p).set_color(c) for p, c in zip(["10", "01", "11"], set_colors)]
+        ax.set(title=f"{'down' if neg else 'up'}regulated genes")
+        return ax
+
+
+    def gene_regulation_venn_diagram(
+        self,
+        layout: tuple(1, 2),
+        figsize: tuple = (6, 3),
+        set_labels: tuple = ("day2", "day7")
+    ) -> None:
+        fig, ax = plt.subplots(*layout, figsize=figsize)
+        self.gr_venn(data=self.data.data, group=self.data.group, set_labels=set_labels, ax=ax[0])
+        self.gr_venn(data=self.data.data, group=self.data.group, set_labels=set_labels, ax=ax[1], neg=True)
+        fig.savefig(f"{self.out}/out/venn.png", **kwarg_savefig)
