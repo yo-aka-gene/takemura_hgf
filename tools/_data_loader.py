@@ -29,3 +29,7 @@ class SuematsuData:
         self.index = self.data.index
         self.columns = self.data.columns
         self.shape = self.data.shape
+        self.group = pd.Series(
+            [f"day{day}-{condition}" for day, condition in zip(self.meta.day, self.meta.condition)],
+            index=self.index
+        )
