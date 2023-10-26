@@ -133,3 +133,35 @@ class StratifiedGOAnalysis:
                     f"../out/go_{category}_{subcategory.replace(' & ', '+')}.png",
                     **kwarg_savefig
                 )
+
+
+    def silent_enrichment_analysis(
+            self,
+            figsize: tuple = None,
+            top: int = 30
+        ):
+        for category in self.data:
+            for subcategory in self.data[category]:
+                fig, ax = plt.subplots(figsize=figsize)
+                self.go_plot(
+                    data=self.data[category][subcategory],
+                    ax=ax,
+                    top=top,
+                    palette=self.palette[category]
+                )
+                ax.set_title(f"{self.title[category]} ({subcategory})")
+                fig.savefig(
+                    f"../out/go_{category}_{subcategory.replace(' & ', '+')}.png",
+                    **kwarg_savefig
+                )
+                self.close()
+
+
+    def pipeline(
+        self, 
+        pipe: list = ["silent_enrichment_analysis"],
+        close: bool = False
+    ) -> None:
+        for operation in pipe:
+            eval(f"self.{operation}()")
+            self.close() if close else None
