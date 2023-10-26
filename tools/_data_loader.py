@@ -26,3 +26,6 @@ class SuematsuData:
         self.data = self.structure.data
         self.meta = self.structure.meta
         self.req = {"data": fmt(data_path), "meta": fmt(meta_path)}
+        self.index = self.data.index
+        self.columns = self.data.columns
+        self.shape = self.data.shape
