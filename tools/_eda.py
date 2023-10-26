@@ -184,3 +184,22 @@ class EDA:
         self.gr_venn(set_labels=set_labels, ax=ax[0])
         self.gr_venn(set_labels=set_labels, ax=ax[1], neg=True)
         fig.savefig(f"{self.out}/venn.png", **kwarg_savefig)
+
+
+    def close(self) -> None:
+        plt.close()
+
+
+    def pipeline(
+        self,
+        pipe: list = [
+            "scatter_plot",
+            "component_plot",
+            "butterfly_plot", 
+            "gene_regulation_venn_diagram"
+        ], 
+        close: bool = False
+    ) -> None:
+        for operation in pipe:
+            eval(f"self.{operation}()")
+            self.close() if close else None
