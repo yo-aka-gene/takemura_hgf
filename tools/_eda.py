@@ -181,6 +181,6 @@ class EDA:
         set_labels: tuple = ("day2", "day7")
     ) -> None:
         fig, ax = plt.subplots(*layout, figsize=figsize)
-        self.gr_venn(data=self.data.data, group=self.data.group, set_labels=set_labels, ax=ax[0])
-        self.gr_venn(data=self.data.data, group=self.data.group, set_labels=set_labels, ax=ax[1], neg=True)
+        self.gr_venn(set_labels=set_labels, ax=ax[0])
+        self.gr_venn(set_labels=set_labels, ax=ax[1], neg=True)
         fig.savefig(f"{self.out}/out/venn.png", **kwarg_savefig)
