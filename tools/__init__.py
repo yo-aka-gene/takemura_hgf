@@ -4,6 +4,7 @@ from ._go import go, gprofiler
 from ._preference import kwarg_savefig
 from ._eda import EDA
 from ._stratification import StratifiedGOAnalysis
+from ._meta_pipeline import MetaPipeline
 
 
 __all__ = [
@@ -15,4 +16,5 @@ __all__ = [
     "gene_selection",
     "EDA",
     "StratifiedGOAnalysis",
+    "MetaPipeline",
 ]
