@@ -183,4 +183,4 @@ class EDA:
         fig, ax = plt.subplots(*layout, figsize=figsize)
         self.gr_venn(set_labels=set_labels, ax=ax[0])
         self.gr_venn(set_labels=set_labels, ax=ax[1], neg=True)
-        fig.savefig(f"{self.out}/out/venn.png", **kwarg_savefig)
+        fig.savefig(f"{self.out}/venn.png", **kwarg_savefig)
