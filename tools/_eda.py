@@ -176,7 +176,7 @@ class EDA:
 
     def gene_regulation_venn_diagram(
         self,
-        layout: tuple(1, 2),
+        layout: tuple = (1, 2),
         figsize: tuple = (6, 3),
         set_labels: tuple = ("day2", "day7")
     ) -> None:
