@@ -15,3 +15,16 @@ def go(data: pd.DataFrame):
     ret = pd.read_csv(f"{tempdir.name}/enrichment.csv", index_col=0)
     tempdir.cleanup()
     return ret
+
+
+def gprofiler(data: pd.DataFrame):
+    tempdir = TemporaryDirectory()
+    data.to_csv(f"{tempdir.name}/data.csv", index=True)
+
+    cmd = f"Rscript {os.path.dirname(__file__)}/_gprofiler_pipeline.R -t {tempdir.name}"
+    subprocess.call(
+        cmd.split()
+    )
+    ret = pd.read_csv(f"{tempdir.name}/enrichment.csv", index_col=0)
+    tempdir.cleanup()
+    return ret
