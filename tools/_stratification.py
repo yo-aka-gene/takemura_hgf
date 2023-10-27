@@ -87,12 +87,12 @@ class StratifiedGOAnalysis:
     def go_plot(
         self,
         category: str,
-        subcategor: str,
+        subcategory: str,
         ax: plt.Axes = None,
         top: int = None,
         palette: str = None
     ):
-        data = self.result[category][subcategor]
+        data = self.result[category][subcategory]
         top = min(len(data), top) if isinstance(top, int) else len(data)
         if ax is None:
             ysize = (lambda x: max(5, int(x / 5)))(top)
