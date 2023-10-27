@@ -82,6 +82,7 @@ class EDA:
         regex: str,
         ax: plt.Axes = None,
         d: float = .8,
+        flip: bool = False,
         dim_idx: int = 0,
         idx_starts_with: int = 1,
         palette: str = "coolwarm",
@@ -92,7 +93,7 @@ class EDA:
             _, ax = plt.subplots()
         dat = pd.DataFrame(
             {
-                "cohens_d": cohens_d(self.data.data, self.data.group, regex=regex).fillna(0),
+                "cohens_d": cohens_d(self.data.data, self.data.group, regex=regex, flip=flip).fillna(0),
                 "components": self.model.components_[dim_idx]
             },
             index=self.data.columns
@@ -134,6 +135,7 @@ class EDA:
         figsize: tuple = (6, 6),
         hspace: float = .4,
         d: float = .8,
+        flip: bool = False,
         dim_idx: int = 1,
         idx_starts_with: int = 1,
         palette: str = "coolwarm",
@@ -144,7 +146,7 @@ class EDA:
         fig.subplots_adjust(hspace=hspace)
         [
             self.comp_by_d(
-                regex=r, ax=a, d=d, dim_idx=dim_idx,
+                regex=r, ax=a, d=d, flip=flip, dim_idx=dim_idx,
                 idx_starts_with=idx_starts_with,
                 palette=palette, s=s, alpha=alpha
             ) for r, a in zip(set_labels, ax)
@@ -158,12 +160,19 @@ class EDA:
         ax: plt.Axes = None,
         d: float = .8,
         neg: bool = False,
+        flip: bool = False,
         set_colors: tuple = ("C0", "C2", "C1")
     ) -> None:
         if ax is None:
             _, ax = plt.subplots()
-        a_genes = gene_selection(self.data.data, self.data.group, regex=set_labels[0], d=d, neg=neg).index
-        b_genes = gene_selection(self.data.data, self.data.group, regex=set_labels[1], d=d, neg=neg).index
+        a_genes = gene_selection(
+            self.data.data, self.data.group,
+            regex=set_labels[0], d=d, neg=neg, flip=flip
+        ).index
+        b_genes = gene_selection(
+            self.data.data, self.data.group,
+            regex=set_labels[1], d=d, neg=neg, flip=flip
+        ).index
         n_intersection = len([v for v in a_genes if v in b_genes])
         v = venn2(
             subsets=(len(a_genes) - n_intersection, len(b_genes) - n_intersection, n_intersection),
@@ -180,11 +189,12 @@ class EDA:
         layout: tuple = (1, 2),
         figsize: tuple = (6, 3),
         set_labels: tuple = ("day2", "day7"),
-        set_colors: tuple = ("m", "y", "grey")
+        set_colors: tuple = ("m", "y", "grey"),
+        flip: bool = False
     ) -> None:
         fig, ax = plt.subplots(*layout, figsize=figsize)
-        self.gr_venn(set_labels=set_labels, ax=ax[0], set_colors=set_colors)
-        self.gr_venn(set_labels=set_labels, ax=ax[1], neg=True, set_colors=set_colors)
+        self.gr_venn(set_labels=set_labels, ax=ax[0], set_colors=set_colors, flip=flip)
+        self.gr_venn(set_labels=set_labels, ax=ax[1], neg=True, set_colors=set_colors, flip=flip)
         fig.savefig(f"{self.out}/venn_{set_labels[0]}_{set_labels[1]}.png", **kwarg_savefig)
 
 

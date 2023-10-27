@@ -10,10 +10,22 @@ from ._preference import kwarg_savefig
 
 class StratifiedGOAnalysis:
     def data_setter(self, data: SuematsuData, d: float, split_by_days: bool = False) -> dict:
-        upa = gene_selection(data.data, data.group, regex="HGF+" if split_by_days else "day2", d=d)
-        upb = gene_selection(data.data, data.group, regex="control" if split_by_days else "day7", d=d)
-        downa = gene_selection(data.data, data.group, regex="HGF+" if split_by_days else "day2", d=d, neg=True)
-        downb = gene_selection(data.data, data.group, regex="control" if split_by_days else "day7", d=d, neg=True)
+        upa = gene_selection(
+            data.data, data.group, regex="HGF+" if split_by_days else "day2", 
+            d=d, flip=split_by_days
+        )
+        upb = gene_selection(
+            data.data, data.group, regex="control" if split_by_days else "day7",
+            d=d, flip=split_by_days
+        )
+        downa = gene_selection(
+            data.data, data.group, regex="HGF+" if split_by_days else "day2",
+            d=d, neg=True, flip=split_by_days
+        )
+        downb = gene_selection(
+            data.data, data.group, regex="control" if split_by_days else "day7",
+            d=d, neg=True, flip=split_by_days
+        )
         return {
             "up": {
                 "HGF+": upa.loc[[v for v in upa.index if v not in upb.index]],
