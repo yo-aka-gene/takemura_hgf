@@ -44,20 +44,20 @@ def schematic(
         "connectionstyle": "arc3"
     }
 
-    ax[0].add_patch(patch.Circle(xy=(.35, .8), radius=.2, ec="r", fc="r", alpha=.3))
-    ax[0].add_patch(patch.Circle(xy=(.35, .2), radius=.2, ec="b", fc="b", alpha=.3))
-    ax[0].add_patch(patch.Rectangle(xy=(.5, .65), width=np.sqrt(2)/5, height=np.sqrt(2)/5, rotation_point="center", angle=45, ec="r", fc="r", alpha=.3))
-    ax[0].add_patch(patch.Rectangle(xy=(.5, .05), width=np.sqrt(2)/5, height=np.sqrt(2)/5, rotation_point="center", angle=45, ec="b", fc="b", alpha=.3))
-    ax[0].add_patch(patch.Circle(xy=(0, .5), radius=.05, ec=".2", fc=".2", alpha=1))
-    ax[0].add_patch(patch.Rectangle(xy=(.957, .46), width=.13/np.sqrt(2), height=.13/np.sqrt(2), rotation_point="center", angle=45, ec=".2", fc=".2"))
-    ax[0].annotate('', xy=(.65, .8), xytext=(.35, .8), arrowprops={**as2, "color": "r"})
-    ax[0].annotate('', xy=(.65, .2), xytext=(.35, .2), arrowprops={**as2, "color": "b"})
-    ax[0].annotate('', xy=(0, .2), xytext=(0, .8), arrowprops=as1)
-    ax[0].annotate('', xy=(1, .2), xytext=(1, .8), arrowprops=as1)
-    ax[0].text(.5, 1.1, "upregulated", horizontalalignment="center", verticalalignment="center", c="r")
-    ax[0].text(.5, -.1, "downregulated", horizontalalignment="center", verticalalignment="center", c="b")
-    ax[0].text(.5, .5, "longitudal transition", horizontalalignment="center", verticalalignment="center", c=".2")
-    ax[0].set(title="Temporal Changes of HGF's Effect")
+    ax[2].add_patch(patch.Circle(xy=(.35, .8), radius=.2, ec="r", fc="r", alpha=.3))
+    ax[2].add_patch(patch.Circle(xy=(.35, .2), radius=.2, ec="b", fc="b", alpha=.3))
+    ax[2].add_patch(patch.Rectangle(xy=(.5, .65), width=np.sqrt(2)/5, height=np.sqrt(2)/5, rotation_point="center", angle=45, ec="r", fc="r", alpha=.3))
+    ax[2].add_patch(patch.Rectangle(xy=(.5, .05), width=np.sqrt(2)/5, height=np.sqrt(2)/5, rotation_point="center", angle=45, ec="b", fc="b", alpha=.3))
+    ax[2].add_patch(patch.Circle(xy=(0, .5), radius=.05, ec=".2", fc=".2", alpha=1))
+    ax[2].add_patch(patch.Rectangle(xy=(.957, .46), width=.13/np.sqrt(2), height=.13/np.sqrt(2), rotation_point="center", angle=45, ec=".2", fc=".2"))
+    ax[2].annotate('', xy=(.65, .8), xytext=(.35, .8), arrowprops={**as2, "color": "r"})
+    ax[2].annotate('', xy=(.65, .2), xytext=(.35, .2), arrowprops={**as2, "color": "b"})
+    ax[2].annotate('', xy=(0, .2), xytext=(0, .8), arrowprops=as1)
+    ax[2].annotate('', xy=(1, .2), xytext=(1, .8), arrowprops=as1)
+    ax[2].text(.5, 1.1, "upregulated", horizontalalignment="center", verticalalignment="center", c="r")
+    ax[2].text(.5, -.1, "downregulated", horizontalalignment="center", verticalalignment="center", c="b")
+    ax[2].text(.5, .5, "longitudal transition", horizontalalignment="center", verticalalignment="center", c=".2")
+    ax[2].set(title="Temporal Changes of HGF's Effect")
 
 
     ax[1].add_patch(patch.Circle(xy=(.2, .65), radius=.2, ec="b", fc="b", alpha=.3))
@@ -76,6 +76,20 @@ def schematic(
     ax[1].text(-.1, .5, "down-\nregulated", horizontalalignment="center", verticalalignment="center", c="b")
     ax[1].text(.5, .5, "baseline\nchanges", horizontalalignment="center", verticalalignment="center", c=".2")
     ax[1].set(title="Consistency of Cellular Dynamics")
+
+    
+    ax[0].add_patch(patch.Circle(xy=(.25, .7), radius=.2, ec="r", fc="r", alpha=.3))
+    ax[0].add_patch(patch.Circle(xy=(.25, .3), radius=.2, ec="b", fc="b", alpha=.3))
+    ax[0].add_patch(patch.Rectangle(xy=(.6, .55), width=np.sqrt(2)/5, height=np.sqrt(2)/5, rotation_point="center", angle=45, ec="r", fc="r", alpha=.3))
+    ax[0].add_patch(patch.Rectangle(xy=(.6, .15), width=np.sqrt(2)/5, height=np.sqrt(2)/5, rotation_point="center", angle=45, ec="b", fc="b", alpha=.3))
+    ax[0].add_patch(patch.Circle(xy=(0, .5), radius=.05, ec=".2", fc=".2", alpha=1))
+    ax[0].add_patch(patch.Rectangle(xy=(.957, .46), width=.13/np.sqrt(2), height=.13/np.sqrt(2), rotation_point="center", angle=45, ec=".2", fc=".2"))
+    ax[0].annotate('', xy=(0, .2), xytext=(0, .8), arrowprops=as1)
+    ax[0].annotate('', xy=(1, .2), xytext=(1, .8), arrowprops=as1)
+    ax[0].text(.5, 1, "upregulated", horizontalalignment="center", verticalalignment="center", c="r")
+    ax[0].text(.5, 0, "downregulated", horizontalalignment="center", verticalalignment="center", c="b")
+    ax[0].set(title="Overview of HGF's Effect\n(Suematsu Y, et al., $Inflamm\; Regener$, 2023)")
+    
     return fig, ax
 
 
@@ -91,8 +105,8 @@ class Artist:
 
     def comparison_schematic(
         self,
-        layout: tuple = (1, 2),
-        figsize: tuple = (10, 4),
+        layout: tuple = (1, 3),
+        figsize: tuple = (14, 4),
         wspace: float = .4
     ):
         fig, _ = schematic(layout=layout, figsize=figsize, wspace=wspace)
