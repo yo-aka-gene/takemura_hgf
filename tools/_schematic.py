@@ -15,7 +15,7 @@ def base_scheme(ax: plt.Axes) -> None:
     })
     sns.scatterplot(dat, x="x", y="y", hue="HGF", style="day", s=100, ax=ax)
     ax.set_xlim([-.3, 1.3]), ax.set_ylim([-.3, 1.3])
-    ax.set(xlabel="Time Cource", ylabel="Experimental Condition")
+    ax.set(xlabel="Time Course", ylabel="Experimental Condition")
     ax.set_xticks([0, 1], ["day2", "day7"])
     ax.set_yticks([0, 1], ["control", "HGF+"])
     ax.get_legend().remove()
