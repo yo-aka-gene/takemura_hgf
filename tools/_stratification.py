@@ -39,6 +39,16 @@ class StratifiedGOAnalysis:
         }
 
 
+    def title_setter(self, split_by_days: bool = False) -> dict:
+        return {
+            "up": "upregulated GO terms through time cource",
+            "down": "downregulated GO terms through time cource"
+        } if split_by_days else {
+            "up": "upregulated GO terms by HGF",
+            "down": "downregulated GO terms by HGF"
+        }
+
+
     def __init__(
             self,
             data: SuematsuData,
@@ -49,7 +59,7 @@ class StratifiedGOAnalysis:
         ) -> None:
         self.data = self.data_setter(data=data, d=d, split_by_days=split_by_days)
         self.palette = {"up": palettes[0], "down": palettes[1]}
-        self.title = {"up": "upregulated GO terms", "down": "downregulated GO terms"}
+        self.title = self.title_setter(split_by_days=split_by_days)
         self.out = out
 
 
