@@ -7,7 +7,7 @@ def cohens_d(data: pd.DataFrame, group: pd.Series, regex: str, flip: bool = Fals
     n = df_group.count().filter(axis=0, regex=regex)
     s = df_group.std(ddof=0).filter(axis=0, regex=regex)
     xbar = df_group.mean().filter(axis=0, regex=regex)
-    xbar = xbar.iloc if flip else xbar.iloc[::-1, :]
+    xbar = xbar if flip else xbar.iloc[::-1, :]
     return xbar.diff().iloc[1, :] / np.sqrt((n * s).sum() / n.sum())
 
 
