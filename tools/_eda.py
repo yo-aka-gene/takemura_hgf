@@ -198,7 +198,7 @@ class EDA:
         layout: tuple = (1, 2),
         figsize: tuple = (6, 3),
         set_labels: tuple = ("day2", "day7"),
-        set_colors: tuple = ("m", "y", "grey"),
+        set_colors: tuple = ("y", "m", "grey"),
         flip: bool = False
     ) -> None:
         fig, ax = plt.subplots(*layout, figsize=figsize)
