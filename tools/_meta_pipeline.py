@@ -1,4 +1,3 @@
-class MetaPipeline:
-    def __init__(self, pipelines: list, close: bool = True):
-        for p in pipelines:
-            p.pipeline(close=close)
+def metapipeline(pipelines: list, close: bool = True):
+    for p in pipelines:
+        p.pipeline(close=close)
