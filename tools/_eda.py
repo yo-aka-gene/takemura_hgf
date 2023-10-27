@@ -26,13 +26,13 @@ class EDA:
         return self.args[argname] if argname in self.args else arg
 
 
-    def scatter_plot(self, figsize: tuple = (3, 3)) -> None:
+    def scatter_plot(self, figsize: tuple = (3, 3), **kwargs) -> None:
         fig, ax = plt.subplots(figsize=figsize)
         sns.scatterplot(
             data=self.pca, x="PC1", y="PC2", 
             style=self.data.meta.day, 
             hue=self.data.meta.condition,
-            ax=ax, s=15
+            ax=ax, s=40, **kwargs
         )
         xlim, ylim = ax.get_xlim(), ax.get_ylim()
         ax.set_xlim([min(xlim[0], ylim[0]), max(xlim[1], ylim[1])])
@@ -40,7 +40,7 @@ class EDA:
         ax.legend(bbox_to_anchor=(1, .5), loc="center left")
         ax.set_xlabel(f"PC1 ({(self.model.explained_variance_ratio_[0] * 100).round(3)}%)")
         ax.set_ylabel(f"PC2 ({(self.model.explained_variance_ratio_[1] * 100).round(3)}%)")
-        ax.set(title="RNA-seq data\n(Suematsu Y, et al., $Inflamm\; Regener$, 2023)")
+        ax.set(title=r"RNA-seq data ($n=4\times4$)"+"\n(Suematsu Y, et al., $Inflamm\; Regener$, 2023)")
         fig.savefig(f"{self.out}/pca.png", **kwarg_savefig)
 
 
