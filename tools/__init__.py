@@ -1,7 +1,10 @@
 from ._cohens_d import cohens_d, gene_selection
 from ._data_loader import SuematsuData
 from ._go import go, gprofiler, get_go
-from ._preference import kwarg_savefig, eda_longitudal_args, sgoa_longitudal_args
+from ._preference import (
+    kwarg_savefig, eda_longitudal_args, sgoa_longitudal_args, 
+    venn3_palette1, venn3_palette2
+)
 from ._eda import EDA
 from ._stratification import StratifiedGOAnalysis
 from ._schematic import Artist
@@ -13,6 +16,8 @@ __all__ = [
     "eda_longitudal_args",
     "kwarg_savefig",
     "sgoa_longitudal_args",
+    "venn3_palette1",
+    "venn3_palette2",
     "get_go",
     "go",
     "gprofiler",

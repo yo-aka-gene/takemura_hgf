@@ -20,3 +20,27 @@ sgoa_longitudal_args = {
     "palettes": ("magma", "cividis"),
     "split_by_days": True
 }
+
+
+venn3_palette1 = {
+    # matplotlib-like theme
+    "100": "#1f77b4",
+    "010": "#2ca02c",
+    "001": "#ff7f0e",
+    "110": "#2ca0b4",
+    "011": "#b4b40e",
+    "101": "#ffa0b4",
+    "111": "#eeeeee"
+}
+
+
+venn3_palette2 = {
+    # seurat-like theme
+    "100": "#bbbb11",
+    "010": "#777777",
+    "001": "#bb11bb",
+    "110": "#bbaa77",
+    "011": "#aa77bb",
+    "101": "#bbaabb",
+    "111": "#eeeeee"
+}
