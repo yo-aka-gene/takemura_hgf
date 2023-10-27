@@ -14,3 +14,9 @@ eda_longitudal_args = {
     "set_colors": ("C0", "C1", "C2"),
     "pipe": ["butterfly_plot", "gene_regulation_venn_diagram"]
 }
+
+
+sgoa_longitudal_args = {
+    "palettes": ("magma", "cividis"),
+    "split_by_days": True
+}
