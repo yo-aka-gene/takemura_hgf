@@ -122,13 +122,14 @@ class EDA:
                 label=f"{'up' if thresh > 0 else 'down'} ({(dat.cohens_d > d).sum() if thresh > 0 else (dat.cohens_d < -d).sum()})"
             ) for thresh, lim in zip(xlim, (-d, d))
         ]
+        pair = [
+            v for v in self.data.data.groupby(self.data.group).count().filter(axis=0, regex=regex).index
+        ]
         ax.set_xlim(*xlim), ax.set_ylim(*ylim)
         ax.set(
             ylabel=f"PC{dim_idx + idx_starts_with} components", 
             xlabel="Cohen's d",
-            title=' vs '.join([
-                v for v in self.data.data.groupby(self.data.group).count().filter(axis=0, regex=regex).index
-            ])
+            title=' vs '.join(pair[::-1] if flip else pair)
         )
         ax.legend()
         return ax
