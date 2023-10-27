@@ -4,6 +4,7 @@ from ._go import go, gprofiler
 from ._preference import kwarg_savefig, eda_longitudal_args, sgoa_longitudal_args
 from ._eda import EDA
 from ._stratification import StratifiedGOAnalysis
+from ._schematic import Artist
 from ._meta_pipeline import metapipeline
 
 
@@ -19,4 +20,5 @@ __all__ = [
     "EDA",
     "StratifiedGOAnalysis",
     "metapipeline",
+    "Artist",
 ]
