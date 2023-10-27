@@ -44,3 +44,13 @@ venn3_palette2 = {
     "101": "#bbaabb",
     "111": "#eeeeee"
 }
+
+
+venn3_palette_alias = {
+    "palette1": venn3_palette1,
+    "palette2": venn3_palette2,
+    "venn3_palette1": venn3_palette1,
+    "venn3_palette2": venn3_palette2,
+    1: venn3_palette1,
+    2: venn3_palette2
+}
