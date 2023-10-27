@@ -135,7 +135,8 @@ class StratifiedGOAnalysis:
             for subcategory in self.data[category]:
                 fig, ax = plt.subplots(figsize=figsize)
                 self.go_plot(
-                    data=self.data[category][subcategory],
+                    category=category,
+                    subcategory=subcategory,
                     ax=ax,
                     top=top,
                     palette=self.palette[category]
@@ -156,7 +157,8 @@ class StratifiedGOAnalysis:
             for subcategory in self.data[category]:
                 fig, ax = plt.subplots(figsize=figsize)
                 self.go_plot(
-                    data=self.data[category][subcategory],
+                    category=category,
+                    subcategory=subcategory,
                     ax=ax,
                     top=top,
                     palette=self.palette[category]
