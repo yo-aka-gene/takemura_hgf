@@ -129,6 +129,7 @@ class EDA:
 
     def butterfly_plot(
         self,
+        set_labels: tuple = ("day2", "day7"),
         layout: tuple = (2, 1),
         figsize: tuple = (6, 6),
         hspace: float = .4,
@@ -143,12 +144,12 @@ class EDA:
         fig.subplots_adjust(hspace=hspace)
         [
             self.comp_by_d(
-                regex=f"day{day}", ax=a, d=d, dim_idx=dim_idx,
+                regex=r, ax=a, d=d, dim_idx=dim_idx,
                 idx_starts_with=idx_starts_with,
                 palette=palette, s=s, alpha=alpha
-            ) for day, a in zip([2, 7], ax)
+            ) for r, a in zip(set_labels, ax)
         ]
-        fig.savefig(f"{self.out}/regulation_plot.png", **kwarg_savefig)
+        fig.savefig(f"{self.out}/butterfly_plot_{set_labels[0]}_{set_labels[1]}.png", **kwarg_savefig)
 
 
     def gr_venn(
@@ -178,12 +179,13 @@ class EDA:
         self,
         layout: tuple = (1, 2),
         figsize: tuple = (6, 3),
-        set_labels: tuple = ("day2", "day7")
+        set_labels: tuple = ("day2", "day7"),
+        set_colors: tuple = ("C0", "C2", "C1")
     ) -> None:
         fig, ax = plt.subplots(*layout, figsize=figsize)
-        self.gr_venn(set_labels=set_labels, ax=ax[0])
-        self.gr_venn(set_labels=set_labels, ax=ax[1], neg=True)
-        fig.savefig(f"{self.out}/venn.png", **kwarg_savefig)
+        self.gr_venn(set_labels=set_labels, ax=ax[0], set_colors=set_colors)
+        self.gr_venn(set_labels=set_labels, ax=ax[1], neg=True, set_colors=set_colors)
+        fig.savefig(f"{self.out}/venn_{set_labels[0]}_{set_labels[1]}.png", **kwarg_savefig)
 
 
     def close(self) -> None:
