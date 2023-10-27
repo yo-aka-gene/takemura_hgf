@@ -10,7 +10,7 @@ from ._preference import kwarg_savefig
 
 
 class EDA:
-    def __init__(self, data: SuematsuData, out: str = "/home/jovyan/out") -> None:
+    def __init__(self, data: SuematsuData, out: str = "/home/jovyan/out", args: dict = {}) -> None:
         self.data = data
         self.model= PCA(random_state=0)
         self.pca = pd.DataFrame(
@@ -19,6 +19,12 @@ class EDA:
             columns=[f"PC{i + 1}" for i in range(min(data.shape))]
         )
         self.out = out
+        self.args = args
+
+
+    def fetch(self, argname: str, arg):
+        return self.args[argname] if argname in self.args else arg
+
 
     def scatter_plot(self, figsize: tuple = (3, 3)) -> None:
         fig, ax = plt.subplots(figsize=figsize)
@@ -144,6 +150,9 @@ class EDA:
     ) -> None:
         fig, ax = plt.subplots(*layout, figsize=figsize)
         fig.subplots_adjust(hspace=hspace)
+        set_labels = self.fetch("set_labels", set_labels)
+        dim_idx = self.fetch("dim_idx", dim_idx)
+        flip = self.fetch("flip", flip)
         [
             self.comp_by_d(
                 regex=r, ax=a, d=d, flip=flip, dim_idx=dim_idx,
@@ -193,6 +202,9 @@ class EDA:
         flip: bool = False
     ) -> None:
         fig, ax = plt.subplots(*layout, figsize=figsize)
+        set_labels = self.fetch("set_labels", set_labels)
+        set_colors = self.fetch("set_colors", set_colors)
+        flip = self.fetch("flip", flip)
         self.gr_venn(set_labels=set_labels, ax=ax[0], set_colors=set_colors, flip=flip)
         self.gr_venn(set_labels=set_labels, ax=ax[1], neg=True, set_colors=set_colors, flip=flip)
         fig.savefig(f"{self.out}/venn_{set_labels[0]}_{set_labels[1]}.png", **kwarg_savefig)
@@ -212,6 +224,7 @@ class EDA:
         ], 
         close: bool = False
     ) -> None:
+        pipe = self.fetch("pipe", pipe)
         for operation in pipe:
             eval(f"self.{operation}()")
             self.close() if close else None
