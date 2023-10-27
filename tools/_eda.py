@@ -180,7 +180,7 @@ class EDA:
         layout: tuple = (1, 2),
         figsize: tuple = (6, 3),
         set_labels: tuple = ("day2", "day7"),
-        set_colors: tuple = ("C0", "C2", "C1")
+        set_colors: tuple = ("m", "y", "grey")
     ) -> None:
         fig, ax = plt.subplots(*layout, figsize=figsize)
         self.gr_venn(set_labels=set_labels, ax=ax[0], set_colors=set_colors)
