@@ -11,7 +11,7 @@ eda_longitudal_args = {
     "set_labels": ("HGF+", "control"),
     "dim_idx": 0,
     "flip": True,
-    "set_colors": ("C0", "C1", "C2"),
+    "set_colors": ("C1", "C0", "C2"),
     "pipe": ["butterfly_plot", "gene_regulation_venn_diagram"]
 }
 
@@ -24,11 +24,11 @@ sgoa_longitudal_args = {
 
 venn3_palette1 = {
     # matplotlib-like theme
-    "100": "#1f77b4",
+    "100": "#ff7f0e",
     "010": "#2ca02c",
-    "001": "#ff7f0e",
-    "110": "#2ca0b4",
-    "011": "#b4b40e",
+    "001": "#1f77b4",
+    "110": "#b4b40e",
+    "011": "#2ca0b4",
     "101": "#ffa0b4",
     "111": "#eeeeee"
 }
