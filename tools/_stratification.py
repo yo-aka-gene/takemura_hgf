@@ -9,6 +9,16 @@ from ._go import gprofiler
 from ._preference import kwarg_savefig, venn3_palette_alias
 
 
+def fmt_go_terms(term: str, thresh: int = 30) -> str:
+    if len(term) > thresh:
+        words = term.split(" ")
+        ret = ""
+        for v in words:
+            ret = f"{ret} {v}" if len(ret.split("\n")[-1]) + len(v) < thresh else f"{ret}\n{v}"
+        term = ret[1:]
+    return term
+
+
 class StratifiedGOAnalysis:
     def data_setter(self, data: SuematsuData, d: float, split_by_days: bool = False) -> dict:
         upa = gene_selection(
