@@ -17,6 +17,10 @@ optslist <- list(
 parser <- OptionParser(option_list=optslist)
 opts <- parse_args(parser)
 
-go.result <- gomatrix(gene=gene_loader(paste0(opts$tempdir, "/data.csv")))
+go.result <- goid2sym(
+    goid=read.csv(
+        paste0(opts$tempdir, "/data.csv"), header=T, row.names=1
+    )$term_id
+)
 
-write.csv(as.data.frame(go.result), paste0(opts$tempdir, "/gomatrix.csv"))
+write.csv(as.data.frame(go.result), paste0(opts$tempdir, "/genelist.csv"))

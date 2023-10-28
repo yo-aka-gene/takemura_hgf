@@ -83,3 +83,9 @@ ego <- function(
         )
     )
 }
+
+
+goid2sym <- function(goid){
+    stopifnot(is.character(goid))
+    return(AnnotationDbi::select(org.Hs.eg.db, keytype="GOALL", keys=goid, columns="SYMBOL"))
+}
