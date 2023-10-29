@@ -7,6 +7,6 @@
 
 ## Contact
 ### Data Availability
-- Contact [hidokano@keio.jp](hidokano@keio.jp)
+- Contact [hidokano@keio.jp](mailto:hidokano@keio.jp)
 ### Data Analysis & Code
-- Contact [yujiokano@keio.jp](yujiokano@keio.jp)
+- Contact [yujiokano@keio.jp](mailto:yujiokano@keio.jp)
