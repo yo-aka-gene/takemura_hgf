@@ -54,6 +54,7 @@ class EDA:
         self,
         ax: plt.Axes = None,
         top: int = 30,
+        show_bottom: bool = False,
         dim_idx: int = 0,
         idx_starts_with: int = 1,
         color: str = None
@@ -66,9 +67,12 @@ class EDA:
             columns=["components"]
         ).sort_values("components", ascending=False)
         top = min(top, len(comp))
-        sns.barplot(data=comp.iloc[:top, :], x=comp.index[:top], y=comp.components[:top], ax=ax, color=color)
+        title_suffix = f"top{top - top // 2} vs bottom{top // 2}" if show_bottom else f"top{top}"
+        top = np.arange(top - top // 2).tolist() + (-np.arange(1, top // 2)).tolist()[::-1] if show_bottom else top
+        comp = comp.iloc[top, :] if show_bottom else comp.iloc[:top, :]
+        sns.barplot(data=comp, x=comp.index, y=comp.components, ax=ax, color=color)
         ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
-        ax.set(title=f"PC{dim_idx + idx_starts_with}")
+        ax.set(title=f"PC{dim_idx + idx_starts_with} ({title_suffix})")
 
 
     def component_plot(
@@ -76,13 +80,14 @@ class EDA:
         layout: tuple = (1, 2),
         figsize: tuple = (10, 3),
         top: int = 30,
+        show_bottom: bool = True,
         idx_starts_with: int = 1,
         color: str = ".2"
     ) -> None:
         fig, ax = plt.subplots(*layout, figsize=figsize)
         [
             self.component_visualizer(
-                ax=ax[i], dim_idx=i, color=color, top=top,
+                ax=ax[i], dim_idx=i, color=color, top=top, show_bottom=show_bottom,
                 idx_starts_with=idx_starts_with
             ) for i in range(2)
         ]
