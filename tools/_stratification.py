@@ -85,6 +85,7 @@ class StratifiedGOAnalysis:
         self.venn3_palette = "palette1" if split_by_days else "palette2"
         self.barplot_palette = ("C1", "C2", "C0") if split_by_days else ("y", "grey", "m")
         self.title = self.title_setter(split_by_days=split_by_days)
+        self.split_by_days = split_by_days
         self.out = out
         self.result = {"up": {}, "down": {}}
         for category in self.data:
@@ -275,6 +276,7 @@ class StratifiedGOAnalysis:
 
 
     def go2gene_name_viz_base(
+        self,
         query: pd.DataFrame,
         hit_dict: dict,
         ax: plt.Axes = None,
@@ -308,6 +310,7 @@ class StratifiedGOAnalysis:
 
 
     def go2gene_n_viz_base(
+        self,
         query: pd.DataFrame,
         hit_dict: dict,
         category: str = None,
@@ -352,14 +355,19 @@ class StratifiedGOAnalysis:
         hspace: float = .3,
     ) -> None:
         for category in self.data:
-            _, query, hit_dict = self.go2gene_base(category=category, top=top, filter_id=filter_id)
+            _, query, hit_dict = self.go2gene_base(
+                category=category,
+                top=top,
+                filter_id=10 if self.split_by_days else filter_id
+            )
             fig, _ = self.go2gene_n_viz_base(
                 query=query, hit_dict=hit_dict, plotsize=plotsize,
                 wspace=wspace, hspace=hspace, palette=self.barplot_palette
             )
             suffix = "_".join(list(self.result["up"].keys())[::2])
+            n_top = "all" if top is None else f"top{top}"
             fig.savefig(
-                f"{self.out}/go_barplot_{category}_{filter_id}_top{top}_{suffix}.png",
+                f"{self.out}/go_barplot_{category}_{filter_id}_{n_top}_{suffix}.png",
                 **kwarg_savefig
             )
 
