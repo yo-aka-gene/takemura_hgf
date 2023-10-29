@@ -1,8 +1,6 @@
 # takemura_hgf
 [![DOI](https://img.shields.io/badge/DOI-InPreparation-blue.svg?longCache=true)]()
 [![PMID](https://img.shields.io/badge/PMID-InPreparation-orange.svg?longCache=true)]()
-
-hgf project
 ---
 ## Authors
 - [Yuji Okano](mailto:yuijokano@keio.jp)
