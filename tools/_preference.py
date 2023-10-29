@@ -63,7 +63,7 @@ def path_exists(regex: str, require: int = None) -> bool:
     return (
         len(glob.glob(regex)) != 0
     ) if require is None else (
-        len(glob.glob(regex) == require)
+        len(glob.glob(regex)) == require
     )
 
 
