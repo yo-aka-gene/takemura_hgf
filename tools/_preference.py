@@ -68,6 +68,13 @@ def path_exists(regex: str, require: int = None) -> bool:
     )
 
 
+artist_pipeline_adgile = {
+    "comparison_schematic": lambda o: path_exists(
+        regex=f"{o}/comparison_schematic.png"
+    ),
+}
+
+
 eda_pipeline_outputs = {
     "scatter_plot": lambda o, _: f"{o}/pca.png",
     "component_plot": lambda o, _: f"{o}/components.png",
