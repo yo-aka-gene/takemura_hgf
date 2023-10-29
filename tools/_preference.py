@@ -11,6 +11,7 @@ kwarg_savefig = {
 
 
 eda_longitudal_args = {
+    "split_by_days": True,
     "set_labels": ("HGF+", "control"),
     "dim_idx": 0,
     "flip": True,
@@ -65,6 +66,46 @@ def path_exists(regex: str, require: int = None) -> bool:
     ) if require is None else (
         len(glob.glob(regex)) == require
     )
+
+
+eda_pipeline_outputs = {
+    "scatter_plot": lambda o, _: f"{o}/pca.png",
+    "component_plot": lambda o, _: f"{o}/components.png",
+    "butterfly_plot": lambda o, c: f"{o}/butterfly_plot_{c}.png",
+    "gene_regulation_venn_diagram": lambda o, c: f"{o}/venn_{c}.png",
+}
+
+
+eda_pipeline_args = {
+    "scatter_plot": lambda _: (None,),
+    "component_plot": lambda _: (None,),
+    "butterfly_plot": lambda spbd: ("H*",) if spbd else ("day*",),
+    "gene_regulation_venn_diagram": lambda spbd: ("H*",) if spbd else ("day*",),
+}
+
+
+eda_pipeline_adgile = {
+    "scatter_plot": lambda o, spbd: path_exists(
+        regex=eda_pipeline_outputs["scatter_plot"](
+            o, *eda_pipeline_args["scatter_plot"](spbd)
+        )
+    ),
+    "component_plot": lambda o, spbd: path_exists(
+        regex=eda_pipeline_outputs["component_plot"](
+            o, *eda_pipeline_args["component_plot"](spbd)
+        )
+    ),
+    "butterfly_plot": lambda o, spbd: path_exists(
+        regex=eda_pipeline_outputs["butterfly_plot"](
+            o, *eda_pipeline_args["butterfly_plot"](spbd)
+        )
+    ),
+    "gene_regulation_venn_diagram": lambda o, spbd: path_exists(
+        regex=eda_pipeline_outputs["gene_regulation_venn_diagram"](
+            o, *eda_pipeline_args["gene_regulation_venn_diagram"](spbd)
+        )
+    ),
+}
 
 
 sgoa_pipeline_outputs = {
