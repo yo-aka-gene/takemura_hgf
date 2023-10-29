@@ -357,11 +357,12 @@ class StratifiedGOAnalysis:
         wspace: float = .3,
         hspace: float = .3,
     ) -> None:
+        filter_id = 10 if self.split_by_days else filter_id
         for category in self.data:
             _, query, hit_dict = self.go2gene_base(
                 category=category,
                 top=top,
-                filter_id=10 if self.split_by_days else filter_id
+                filter_id=filter_id
             )
             fig, _ = self.go2gene_n_viz_base(
                 query=query, hit_dict=hit_dict, plotsize=plotsize,
@@ -373,6 +374,34 @@ class StratifiedGOAnalysis:
                 f"{self.out}/go_barplot_{category}_{filter_id}_{n_top}_{suffix}.png",
                 **kwarg_savefig
             )
+    
+
+    def silent_go2gene_barplot(
+        self,
+        top: int = 30,
+        filter_id: int = 111,
+        plotsize: float = 3,
+        wspace: float = .3,
+        hspace: float = .3,
+    ) -> None:
+        filter_id = 10 if self.split_by_days else filter_id
+        for category in self.data:
+            _, query, hit_dict = self.go2gene_base(
+                category=category,
+                top=top,
+                filter_id=filter_id
+            )
+            fig, _ = self.go2gene_n_viz_base(
+                query=query, hit_dict=hit_dict, plotsize=plotsize,
+                wspace=wspace, hspace=hspace, palette=self.barplot_palette
+            )
+            suffix = "_".join(list(self.result["up"].keys())[::2])
+            n_top = "all" if top is None else f"top{top}"
+            fig.savefig(
+                f"{self.out}/go_barplot_{category}_{filter_id}_{n_top}_{suffix}.png",
+                **kwarg_savefig
+            )
+            plt.close()
 
 
     def pipeline(

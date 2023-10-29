@@ -119,7 +119,7 @@ sgoa_pipeline_outputs = {
     "silent_enrichment_analysis": lambda o, sc: f"{o}/go_[ud]*_{sc}.png",
     "top_go_venn": lambda o, suf: f"{o}/go_venn_top*_{suf}.png",
     "go_venn": lambda o, suf: f"{o}/go_venn_all_{suf}.png",
-    "go2gene_barplot": lambda o, fid, t, suf: f"{o}/go_barplot_[ud]*_{fid}_{t}_{suf}.png"
+    "silent_go2gene_barplot": lambda o, fid, t, suf: f"{o}/go_barplot_[ud]*_{fid}_{t}_{suf}.png"
 }
 
 
@@ -127,7 +127,7 @@ sgoa_pipeline_args = {
     "silent_enrichment_analysis": lambda spbd: (("[Hc]*",) if spbd else ("day*",)),
     "top_go_venn": lambda spbd: (("H*",) if spbd else ("day*",)),
     "go_venn": lambda spbd: (("H*",) if spbd else ("day*",)),
-    "go2gene_barplot": lambda spbd: ((10, 30, "H*") if spbd else (111, 30, "day*"))
+    "silent_go2gene_barplot": lambda spbd: ((10, 30, "H*") if spbd else (111, 30, "day*"))
 }
 
 
@@ -150,10 +150,10 @@ sgoa_pipeline_adgile = {
         ),
         require=None
     ),
-    "go2gene_barplot": lambda o, spbd: path_exists(
-        regex=sgoa_pipeline_outputs["go2gene_barplot"](
-            o, *sgoa_pipeline_args["go2gene_barplot"](spbd)
+    "silent_go2gene_barplot": lambda o, spbd: path_exists(
+        regex=sgoa_pipeline_outputs["silent_go2gene_barplot"](
+            o, *sgoa_pipeline_args["silent_go2gene_barplot"](spbd)
         ),
-        require=None
+        require=2
     )
 }
