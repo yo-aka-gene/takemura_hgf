@@ -6,7 +6,10 @@ import seaborn as sns
 from ._cohens_d import gene_selection
 from ._data_loader import SuematsuData
 from ._go import gprofiler, get_go
-from ._preference import kwarg_savefig, venn3_palette_alias
+from ._preference import (
+    kwarg_savefig, venn3_palette_alias,
+    sgoa_pipeline_adgile
+)
 
 
 def fmt_go_terms(term: str, thresh: int = 30) -> str:
@@ -155,7 +158,7 @@ class StratifiedGOAnalysis:
                 )
                 ax.set_title(f"{self.title[category]} ({subcategory})")
                 fig.savefig(
-                    f"../out/go_{category}_{subcategory.replace(' & ', '+')}.png",
+                    f"{self.out}/go_{category}_{subcategory.replace(' & ', '+')}.png",
                     **kwarg_savefig
                 )
 
@@ -177,7 +180,7 @@ class StratifiedGOAnalysis:
                 )
                 ax.set_title(f"{self.title[category]} ({subcategory})")
                 fig.savefig(
-                    f"../out/go_{category}_{subcategory.replace(' & ', '+')}.png",
+                    f"{self.out}/go_{category}_{subcategory.replace(' & ', '+')}.png",
                     **kwarg_savefig
                 )
                 self.close()
@@ -374,14 +377,11 @@ class StratifiedGOAnalysis:
 
     def pipeline(
         self, 
-        pipe: list = [
-            "silent_enrichment_analysis",
-            "top_go_venn",
-            "go_venn",
-            "go2gene_barplot"
-        ],
-        close: bool = False
+        pipe: list = sgoa_pipeline_adgile.keys(),
+        close: bool = False,
+        adgile: bool = False
     ) -> None:
         for operation in pipe:
-            eval(f"self.{operation}()")
-            self.close() if close else None
+            if not (adgile and sgoa_pipeline_adgile[operation](self.out, self.split_by_days)):
+                eval(f"self.{operation}()")
+                self.close() if close else None
