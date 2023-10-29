@@ -6,7 +6,7 @@ import seaborn as sns
 from sklearn.decomposition import PCA
 from ._cohens_d import cohens_d, gene_selection
 from ._data_loader import SuematsuData
-from ._preference import kwarg_savefig
+from ._preference import kwarg_savefig, eda_pipeline_adgile
 
 
 class EDA:
@@ -19,7 +19,7 @@ class EDA:
             columns=[f"PC{i + 1}" for i in range(min(data.shape))]
         )
         self.out = out
-        self.args = args
+        self.args = args if "split_by_days" in args else {"split_by_days": False}
 
 
     def fetch(self, argname: str, arg):
@@ -217,15 +217,13 @@ class EDA:
 
     def pipeline(
         self,
-        pipe: list = [
-            "scatter_plot",
-            "component_plot",
-            "butterfly_plot", 
-            "gene_regulation_venn_diagram"
-        ], 
-        close: bool = False
+        pipe: list = eda_pipeline_adgile.keys(), 
+        close: bool = False,
+        adgile: bool = False,
     ) -> None:
         pipe = self.fetch("pipe", pipe)
+        spbd = self.fetch("split_by_days", False)
         for operation in pipe:
-            eval(f"self.{operation}()")
-            self.close() if close else None
+            if not (adgile and eda_pipeline_adgile[operation](self.out, spbd)):
+                eval(f"self.{operation}()")
+                self.close() if close else None
