@@ -76,19 +76,36 @@ sgoa_pipeline_outputs = {
 
 
 sgoa_pipeline_args = {
-    "silent_enrichment_analysis": lambda spbd: ("[Hc]*",) if spbd else ("day*",),
-    "top_go_venn": lambda spbd: ("H*",) if spbd else ("day*",),
-    "go_venn": lambda spbd: ("H*",) if spbd else ("day*",),
-    "go2gene_barplot": lambda spbd: (10, 30, "H*") if spbd else (111, 30, "day*")
+    "silent_enrichment_analysis": lambda spbd: (("[Hc]*",) if spbd else ("day*",)),
+    "top_go_venn": lambda spbd: (("H*",) if spbd else ("day*",)),
+    "go_venn": lambda spbd: (("H*",) if spbd else ("day*",)),
+    "go2gene_barplot": lambda spbd: ((10, 30, "H*") if spbd else (111, 30, "day*"))
 }
 
 
-sgoa_pipeleine_adgile = {
-    k: lambda o, spbd: path_exists(
-        regex=sgoa_pipeline_outputs[k](o, *sgoa_pipeline_args[k](spbd)),
-        require=v
-    ) for k, v in zip(
-        sgoa_pipeline_outputs.keys(),
-        [6, None, None, 2]
+sgoa_pipeline_adgile = {
+    "silent_enrichment_analysis": lambda o, spbd: path_exists(
+        regex=sgoa_pipeline_outputs["silent_enrichment_analysis"](
+            o, *sgoa_pipeline_args["silent_enrichment_analysis"](spbd)
+        ),
+        require=6
+    ),
+    "top_go_venn": lambda o, spbd: path_exists(
+        regex=sgoa_pipeline_outputs["top_go_venn"](
+            o, *sgoa_pipeline_args["top_go_venn"](spbd)
+        ),
+        require=None
+    ),
+    "go_venn": lambda o, spbd: path_exists(
+        regex=sgoa_pipeline_outputs["go_venn"](
+            o, *sgoa_pipeline_args["go_venn"](spbd)
+        ),
+        require=None
+    ),
+    "go2gene_barplot": lambda o, spbd: path_exists(
+        regex=sgoa_pipeline_outputs["go2gene_barplot"](
+            o, *sgoa_pipeline_args["go2gene_barplot"](spbd)
+        ),
+        require=None
     )
 }
