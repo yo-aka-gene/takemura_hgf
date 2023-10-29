@@ -6,20 +6,26 @@ import seaborn as sns
 from sklearn.decomposition import PCA
 from ._cohens_d import cohens_d, gene_selection
 from ._data_loader import SuematsuData
-from ._preference import kwarg_savefig, eda_pipeline_adgile
+from ._preference import kwarg_savefig, eda_pipeline_adgile, is_skippable
 
 
 class EDA:
-    def __init__(self, data: SuematsuData, out: str = "/home/jovyan/out", args: dict = {}) -> None:
-        self.data = data
-        self.model= PCA(random_state=0)
-        self.pca = pd.DataFrame(
-            self.model.fit_transform(data.data),
-            index=data.index,
-            columns=[f"PC{i + 1}" for i in range(min(data.shape))]
-        )
+    def __init__(
+        self, data: SuematsuData,
+        out: str = "/home/jovyan/out",
+        adgile: bool = False,
+        args: dict = {}
+    ) -> None:
         self.out = out
         self.args = args if "split_by_days" in args else {"split_by_days": False}
+        if not (adgile and is_skippable(eda_pipeline_adgile, out, self.args["split_by_days"])):
+            self.data = data
+            self.model= PCA(random_state=0)
+            self.pca = pd.DataFrame(
+                self.model.fit_transform(data.data),
+                index=data.index,
+                columns=[f"PC{i + 1}" for i in range(min(data.shape))]
+            )
 
 
     def fetch(self, argname: str, arg):
