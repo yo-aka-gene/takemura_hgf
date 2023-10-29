@@ -8,7 +8,7 @@ from ._data_loader import SuematsuData
 from ._go import gprofiler, get_go
 from ._preference import (
     kwarg_savefig, venn3_palette_alias,
-    sgoa_pipeline_adgile, is_skippable
+    sgoa_pipeline_adgile
 )
 
 
@@ -81,24 +81,22 @@ class StratifiedGOAnalysis:
             d: float = .8,
             out: str = "/home/jovyan/out",
             palettes: tuple = ("plasma", "viridis"),
-            split_by_days: bool = False,
-            adgile: bool = False,
+            split_by_days: bool = False
         ) -> None:
+        self.data = self.data_setter(data=data, d=d, split_by_days=split_by_days)
+        self.palette = {"up": palettes[0], "down": palettes[1]}
+        self.venn3_palette = "palette1" if split_by_days else "palette2"
+        self.barplot_palette = ("C1", "C2", "C0") if split_by_days else ("y", "grey", "m")
+        self.title = self.title_setter(split_by_days=split_by_days)
         self.split_by_days = split_by_days
         self.out = out
-        if not (adgile and is_skippable(sgoa_pipeline_adgile, out, split_by_days)):
-            self.data = self.data_setter(data=data, d=d, split_by_days=split_by_days)
-            self.palette = {"up": palettes[0], "down": palettes[1]}
-            self.venn3_palette = "palette1" if split_by_days else "palette2"
-            self.barplot_palette = ("C1", "C2", "C0") if split_by_days else ("y", "grey", "m")
-            self.title = self.title_setter(split_by_days=split_by_days)
-            self.result = {"up": {}, "down": {}}
-            for category in self.data:
-                for subcategory in self.data[category]:
-                    self.result[category] = {
-                        **self.result[category], 
-                        subcategory: gprofiler(self.data[category][subcategory])
-                    }
+        self.result = {"up": {}, "down": {}}
+        for category in self.data:
+            for subcategory in self.data[category]:
+                self.result[category] = {
+                    **self.result[category], 
+                    subcategory: gprofiler(self.data[category][subcategory])
+                }
 
 
     def go_plot(
