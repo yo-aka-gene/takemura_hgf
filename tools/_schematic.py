@@ -3,7 +3,7 @@ import matplotlib.patches as patch
 import numpy as np
 import pandas as pd
 import seaborn as sns
-from tools import kwarg_savefig
+from ._preference import kwarg_savefig, artist_pipeline_adgile
 
 
 def base_scheme(ax: plt.Axes) -> None:
@@ -117,8 +117,14 @@ class Artist:
         plt.close()
 
 
-    def pipeline(self, pipe: list = ["comparison_schematic"], close: bool = False) -> None:
+    def pipeline(
+        self,
+        pipe: list = artist_pipeline_adgile.keys(),
+        close: bool = False,
+        adgile: bool = False
+    ) -> None:
         pipe = self.fetch("pipe", pipe)
         for operation in pipe:
-            eval(f"self.{operation}()")
-            self.close() if close else None
+            if not (adgile and artist_pipeline_adgile[operation](self.out)):
+                eval(f"self.{operation}()")
+                self.close() if close else None
