@@ -5,6 +5,7 @@ from ._preference import (
     kwarg_savefig, eda_longitudal_args, sgoa_longitudal_args, 
     venn3_palette1, venn3_palette2, venn3_palette_alias,
     artist_pipeline_adgile, eda_pipeline_adgile, sgoa_pipeline_adgile,
+    is_skippable
 )
 from ._eda import EDA
 from ._stratification import StratifiedGOAnalysis
@@ -23,6 +24,7 @@ __all__ = [
     "artist_pipeline_adgile",
     "eda_pipeline_adgile",
     "sgoa_pipeline_adgile",
+    "is_skippable",
     "get_go",
     "go",
     "gprofiler",

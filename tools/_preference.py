@@ -1,4 +1,5 @@
 import glob
+import numpy as np
 
 
 kwarg_savefig = {
@@ -66,6 +67,10 @@ def path_exists(regex: str, require: int = None) -> bool:
     ) if require is None else (
         len(glob.glob(regex)) == require
     )
+
+
+def is_skippable(adgile_dict: dict, *args) -> bool:
+    return np.all([b for b in {k: v(*args) for k, v in adgile_dict.items()}.values()])
 
 
 artist_pipeline_adgile = {
