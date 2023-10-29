@@ -3,7 +3,7 @@
 ## Authors
 - [Yuji Okano](mailto:yuijokano@keio.jp)
 - Yoshitaka Kase
-- [Hideyuki Okano](hidokano@keio.jp)
+- [Hideyuki Okano](mailto:hidokano@keio.jp)
 
 ## Contact
 ### Data Availability
