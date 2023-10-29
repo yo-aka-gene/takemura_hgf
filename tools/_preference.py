@@ -1,3 +1,6 @@
+import glob
+
+
 kwarg_savefig = {
     "facecolor": "white",
     "dpi": 300,
@@ -53,4 +56,39 @@ venn3_palette_alias = {
     "venn3_palette2": venn3_palette2,
     1: venn3_palette1,
     2: venn3_palette2
+}
+
+
+def path_exists(regex: str, require: int = None) -> bool:
+    return (
+        len(glob.glob(regex)) != 0
+    ) if require is None else (
+        len(glob.glob(regex) == require)
+    )
+
+
+sgoa_pipeline_outputs = {
+    "silent_enrichment_analysis": lambda o, sc: f"{o}/go_[ud]*_{sc}.png",
+    "top_go_venn": lambda o, suf: f"{o}/go_venn_top*_{suf}.png",
+    "go_venn": lambda o, suf: f"{o}/go_venn_all_{suf}.png",
+    "go2gene_barplot": lambda o, fid, t, suf: f"{o}/go_barplot_[ud]*_{fid}_{t}_{suf}.png"
+}
+
+
+sgoa_pipeline_args = {
+    "silent_enrichment_analysis": lambda spbd: ("[Hc]*",) if spbd else ("day*",),
+    "top_go_venn": lambda spbd: ("H*",) if spbd else ("day*",),
+    "go_venn": lambda spbd: ("H*",) if spbd else ("day*",),
+    "go2gene_barplot": lambda spbd: (10, 30, "H*") if spbd else (111, 30, "day*")
+}
+
+
+sgoa_pipeleine_adgile = {
+    k: lambda o, spbd: path_exists(
+        regex=sgoa_pipeline_outputs[k](o, *sgoa_pipeline_args[k](spbd)),
+        require=v
+    ) for k, v in zip(
+        sgoa_pipeline_outputs.keys(),
+        [6, None, None, 2]
+    )
 }
