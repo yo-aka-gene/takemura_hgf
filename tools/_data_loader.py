@@ -16,7 +16,7 @@ class SuematsuData:
             data_path: str = "https://drive.google.com/file/d/1-CyJhEb3kkkcM6pvJ7Hg5PGt7Abn2jON/view?usp=drive_link",
             meta_path: str = "https://drive.google.com/file/d/1-7DJJQLLEaOyzmoLpw8jRz8ZgX8-Gnzb/view?usp=drive_link"
     ) -> None:
-        if path_exists(regex="/home/jovyan/data/*.pkl", require=2):
+        if not path_exists(regex="/home/jovyan/data/*.pkl", require=2):
             preffix = "https://drive.google.com/uc?id="
             invalid_preffix = "https://drive.google.com/file/d/"
             fmt = lambda x: x if preffix in x else preffix + x.split(invalid_preffix)[1].split("/")[0]
@@ -26,7 +26,7 @@ class SuematsuData:
                 meta=pd.read_csv(io.BytesIO(meta_req.content), sep=",", index_col=0),
             )
             self.structure.data.to_pickle("/home/jovyan/data/data.pkl")
-            self.structure.data.to_pickle("/home/jovyan/data/meta.pkl")
+            self.structure.meta.to_pickle("/home/jovyan/data/meta.pkl")
         else:
             self.structure = Data(
                 data=pd.read_pickle("/home/jovyan/data/data.pkl"),
