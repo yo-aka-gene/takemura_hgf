@@ -56,7 +56,7 @@ def schematic(
     ax[2].annotate('', xy=(1, .2), xytext=(1, .8), arrowprops=as1)
     ax[2].text(.5, 1.1, "upregulated", horizontalalignment="center", verticalalignment="center", c="r")
     ax[2].text(.5, -.1, "downregulated", horizontalalignment="center", verticalalignment="center", c="b")
-    ax[2].text(.5, .5, "longitudal transition", horizontalalignment="center", verticalalignment="center", c=".2")
+    ax[2].text(.5, .5, "longitudinal transition", horizontalalignment="center", verticalalignment="center", c=".2")
     ax[2].set(title="Temporal Changes of HGF's Effect")
 
 
