@@ -13,7 +13,7 @@ gene_loader <- function(path){
 
 egost <- function(
     gene,
-    organism="hsapiens",
+    organism="mmusculus",
     correction_method="fdr", 
     user_threshold=0.05, 
     domain_scope="annotated",

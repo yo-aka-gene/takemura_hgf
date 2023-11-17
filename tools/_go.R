@@ -3,6 +3,7 @@
 suppressPackageStartupMessages({
     library(AnnotationDbi)
     library(org.Hs.eg.db)
+    library(org.Mm.eg.db)
     library(clusterProfiler)
     library(GO.db)
 })
@@ -87,5 +88,5 @@ ego <- function(
 
 goid2sym <- function(goid){
     stopifnot(is.character(goid))
-    return(AnnotationDbi::select(org.Hs.eg.db, keytype="GOALL", keys=goid, columns="SYMBOL"))
+    return(AnnotationDbi::select(org.Mm.eg.db, keytype="GOALL", keys=goid, columns="SYMBOL"))
 }

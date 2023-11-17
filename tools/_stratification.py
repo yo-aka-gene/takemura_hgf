@@ -269,11 +269,11 @@ class StratifiedGOAnalysis:
         query = ref.loc[res.index, :] if filter_id is None else ref.loc[res[res == filter_id].index, :]
         hit = get_go(query).set_index("SYMBOL")
         gene_list = {
-            k: [gene.capitalize() for gene in v.index.str.upper() if gene in hit.index] for k, v in gene_data.items()
+            k: [gene for gene in v.index if gene in hit.index] for k, v in gene_data.items()
         }
         hit_dict = {
             k: hit.loc[
-                [gene.upper() for gene in v],
+                v,
                 ["GOALL", "ONTOLOGYALL"]
             ].reset_index().drop_duplicates() for k, v in gene_list.items()
         }
