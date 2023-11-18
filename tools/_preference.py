@@ -129,7 +129,7 @@ sgoa_pipeline_outputs = {
 
 
 sgoa_pipeline_args = {
-    "silent_enrichment_analysis": lambda spbd: (("[Hc]*",) if spbd else ("day*",)),
+    "silent_enrichment_analysis": lambda spbd: (("[Hc]*",) if spbd else ("[dC]*",)),
     "top_go_venn": lambda spbd: (("H*",) if spbd else ("day*",)),
     "go_venn": lambda spbd: (("H*",) if spbd else ("day*",)),
     "silent_go2gene_barplot": lambda spbd: ((10, "top30", "H*") if spbd else (111, "top30", "day*"))

@@ -54,12 +54,12 @@ class StratifiedGOAnalysis:
         } if split_by_days else {
             "up": {
                 "day2": upa.loc[[v for v in upa.index if v not in upb.index]],
-                "day2 & day7": upa.loc[[v for v in upa.index if v in upb.index]],
+                "Const.": upa.loc[[v for v in upa.index if v in upb.index]],
                 "day7": upb.loc[[v for v in upb.index if v not in upa.index]],
             },
             "down": {
                 "day2": downa.loc[[v for v in downa.index if v not in downb.index]],
-                "day2 & day7": downa.loc[[v for v in downa.index if v in downb.index]],
+                "Const.": downa.loc[[v for v in downa.index if v in downb.index]],
                 "day7": downb.loc[[v for v in downb.index if v not in downa.index]],
             },
         }
@@ -160,7 +160,7 @@ class StratifiedGOAnalysis:
                 )
                 ax.set_title(f"{self.title[category]} ({subcategory})")
                 fig.savefig(
-                    f"{self.out}/go_{category}_{subcategory.replace(' & ', '+')}.png",
+                    f"{self.out}/go_{category}_{subcategory.replace('.', '')}.png",
                     **kwarg_savefig
                 )
 
@@ -186,7 +186,7 @@ class StratifiedGOAnalysis:
                 )
                 ax.set_title(f"{self.title[category]} ({subcategory})")
                 fig.savefig(
-                    f"{self.out}/go_{category}_{subcategory.replace(' & ', '+')}.png",
+                    f"{self.out}/go_{category}_{subcategory.replace('.', '')}.png",
                     **kwarg_savefig
                 )
                 self.close()
