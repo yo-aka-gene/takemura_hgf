@@ -43,12 +43,12 @@ class StratifiedGOAnalysis:
         return {
             "up": {
                 "HGF+": upa.loc[[v for v in upa.index if v not in upb.index]],
-                "HGF+ & control": upa.loc[[v for v in upa.index if v in upb.index]],
+                "common": upa.loc[[v for v in upa.index if v in upb.index]],
                 "control": upb.loc[[v for v in upb.index if v not in upa.index]],
             },
             "down": {
                 "HGF+": downa.loc[[v for v in downa.index if v not in downb.index]],
-                "HGF+ & control": downa.loc[[v for v in downa.index if v in downb.index]],
+                "common": downa.loc[[v for v in downa.index if v in downb.index]],
                 "control": downb.loc[[v for v in downb.index if v not in downa.index]],
             },
         } if split_by_days else {
@@ -113,7 +113,7 @@ class StratifiedGOAnalysis:
         top = min(len(data), top) if isinstance(top, int) else len(data)
         if ax is None:
             ysize = (lambda x: max(5, int(x / 5)))(top)
-            _, ax = plt.subplots(figsize=(5, ysize))
+            _, ax = plt.subplots(figsize=(3, ysize))
         res = data.iloc[:top, :].iloc[::-1, :]
         res = pd.DataFrame({
             "term_name": res.term_name,
@@ -172,7 +172,11 @@ class StratifiedGOAnalysis:
     ):
         for category in self.data:
             for subcategory in self.data[category]:
-                fig, ax = plt.subplots(figsize=figsize)
+                fig, ax = plt.subplots(
+                    figsize=(3, max(5, int(top / 5)))
+                ) if figsize is None else plt.subplots(
+                    figsize=figsize
+                )
                 self.go_plot(
                     category=category,
                     subcategory=subcategory,
@@ -324,8 +328,10 @@ class StratifiedGOAnalysis:
         hspace: float = .2,
         palette: tuple = ("y", "grey", "m")
     ) -> tuple:
-        n_cols = int(np.ceil(np.sqrt(len(query))))
-        n_rows = int(np.ceil(len(query) / n_cols))
+        d_n_col = {3: 3, 8: 4, 15: 5, 18: 6, 21: 7, 24: 6, 35: 7, 48: 8}
+        l = len(query)
+        n_cols = d_n_col[l] if l in d_n_col else int(np.ceil(np.sqrt(l)))
+        n_rows = int(np.ceil(l / n_cols))
         fig, ax = plt.subplots(n_rows, n_cols, figsize=(plotsize * n_cols, plotsize * n_rows))
         ax = ax if len(query) > 2 else np.array([ax.tolist()])
         for i in range(ax.size):
