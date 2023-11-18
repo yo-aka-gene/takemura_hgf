@@ -43,12 +43,12 @@ class StratifiedGOAnalysis:
         return {
             "up": {
                 "HGF+": upa.loc[[v for v in upa.index if v not in upb.index]],
-                "common": upa.loc[[v for v in upa.index if v in upb.index]],
+                "com.": upa.loc[[v for v in upa.index if v in upb.index]],
                 "control": upb.loc[[v for v in upb.index if v not in upa.index]],
             },
             "down": {
                 "HGF+": downa.loc[[v for v in downa.index if v not in downb.index]],
-                "common": downa.loc[[v for v in downa.index if v in downb.index]],
+                "com.": downa.loc[[v for v in downa.index if v in downb.index]],
                 "control": downb.loc[[v for v in downb.index if v not in downa.index]],
             },
         } if split_by_days else {
@@ -326,7 +326,8 @@ class StratifiedGOAnalysis:
         plotsize: float = 3,
         wspace: float = .3,
         hspace: float = .2,
-        palette: tuple = ("y", "grey", "m")
+        palette: tuple = ("y", "grey", "m"),
+        small_title_fontsize: bool = False,
     ) -> tuple:
         d_n_col = {3: 3, 8: 4, 15: 5, 18: 6, 21: 7, 24: 6, 35: 7, 48: 8}
         l = len(query)
@@ -351,10 +352,13 @@ class StratifiedGOAnalysis:
             a.set_xticks(np.arange(len(dat)), dat.index)
             a.set_xlim([-.5, len(dat) - .5])
             a.set(
-                title=fmt_go_terms(term), 
                 ylabel="Num. of genes" if category is None else f"Num. of {category}. genes", 
                 xlabel=""
             )
+            if small_title_fontsize:
+                a.set_title(fmt_go_terms(term, thresh=40), fontsize="small")
+            else:
+                a.set_title(fmt_go_terms(term))
         return fig, ax
 
     def go2gene_barplot(
@@ -374,7 +378,8 @@ class StratifiedGOAnalysis:
             )
             fig, _ = self.go2gene_n_viz_base(
                 query=query, hit_dict=hit_dict, plotsize=plotsize,
-                wspace=wspace, hspace=hspace, palette=self.barplot_palette
+                wspace=wspace, hspace=hspace, palette=self.barplot_palette,
+                small_title_fontsize=self.split_by_days
             )
             suffix = "_".join(list(self.result["up"].keys())[::2])
             n_top = "all" if top is None else f"top{top}"
@@ -401,7 +406,8 @@ class StratifiedGOAnalysis:
             )
             fig, _ = self.go2gene_n_viz_base(
                 query=query, hit_dict=hit_dict, plotsize=plotsize,
-                wspace=wspace, hspace=hspace, palette=self.barplot_palette
+                wspace=wspace, hspace=hspace, palette=self.barplot_palette,
+                small_title_fontsize=self.split_by_days
             )
             suffix = "_".join(list(self.result["up"].keys())[::2])
             n_top = "all" if top is None else f"top{top}"
