@@ -3,7 +3,11 @@ import matplotlib.patches as patch
 import numpy as np
 import pandas as pd
 import seaborn as sns
-from ._preference import kwarg_savefig, artist_pipeline_adgile
+import scipy.special as sc
+from ._preference import (
+    kwarg_savefig, artist_pipeline_adgile,
+    venn3_palette_alias
+)
 
 
 def base_scheme(ax: plt.Axes) -> None:
@@ -93,6 +97,33 @@ def schematic(
     return fig, ax
 
 
+def time_variation(
+    figsize: tuple = (4, 3),
+    cm: dict = venn3_palette_alias[2],
+    smoothness: int = 1000
+) -> tuple:
+    f = lambda a, b: (
+        lambda x: x ** (a - 1) * (1 - x) ** (b - 1) / sc.beta(a, b)
+    )
+    g = lambda a, b: (lambda x: sc.betainc(a, b, x))
+    h = lambda a: (lambda x: f(a, 1)(x) / a)
+    x = np.linspace(0, 1, smoothness)
+    fig, ax = plt.subplots(figsize=figsize)
+    ax.plot(x, f(2.5, 8)(x) / 10, color=cm["100"], label="early effect")
+    ax.plot(x, 0.5 * g(1, 4)(x), color=cm["010"], label="continuous effect")
+    ax.plot(x, h(3.5)(x), color=cm["001"], label="delayed effect")
+    ax.legend()
+    ax.spines['right'].set_visible(False)
+    ax.spines['top'].set_visible(False)
+    ax.tick_params(labelleft=False, labelbottom=False, left=False, bottom=False)
+    ax.set(
+        xlabel="Time",
+        ylabel="Intensity of effects",
+        title="Hypothsis of Time Variation"
+    )
+    return fig, ax
+
+
 class Artist:
     def __init__(self, out: str = "/home/jovyan/out", args: dict = {}):
         self.out = out
@@ -111,6 +142,16 @@ class Artist:
     ):
         fig, _ = schematic(layout=layout, figsize=figsize, wspace=wspace)
         fig.savefig(f"{self.out}/comparison_schematic.png", **kwarg_savefig)
+
+
+    def time_variation(
+        self,
+        figsize: tuple = (4, 3),
+        cm: dict = venn3_palette_alias[2],
+        smoothness: int = 1000
+    ):
+        fig, _ = time_variation(figsize=figsize, cm=cm, smoothness=smoothness)
+        fig.savefig(f"{self.out}/time_variation.png", **kwarg_savefig)
 
 
     def close(self) -> None:

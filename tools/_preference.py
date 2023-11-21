@@ -77,6 +77,9 @@ artist_pipeline_adgile = {
     "comparison_schematic": lambda o: path_exists(
         regex=f"{o}/comparison_schematic.png"
     ),
+    "time_variation": lambda o: path_exists(
+        regex=f"{o}/time_variation.png"
+    ),
 }
 
 
