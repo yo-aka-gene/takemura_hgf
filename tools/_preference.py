@@ -80,6 +80,9 @@ artist_pipeline_adgile = {
     "time_variation": lambda o: path_exists(
         regex=f"{o}/time_variation.png"
     ),
+    "analogical_schematic": lambda o: path_exists(
+        regex=f"{o}/analogical_schematic.png"
+    ),
 }
 
 

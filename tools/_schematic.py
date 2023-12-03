@@ -10,19 +10,23 @@ from ._preference import (
 )
 
 
-def base_scheme(ax: plt.Axes) -> None:
-    dat = pd.DataFrame({
-        "x": np.array(([0] * 4 + [1] * 4) * 2) + np.tile(0.1 * np.cos(np.pi * np.linspace(1/6, 10/6, 4)), 4),
-        "y": np.array([0] * 8 + [1] * 8) + np.tile(0.1 * np.sin(np.pi * np.linspace(1/6, 10/6, 4)), 4),
-        "day": np.array((["2"] * 4 + ["7"] * 4) * 2),
-        "HGF": np.array(["–"] * 8 + ["+"] * 8)
-    })
-    sns.scatterplot(dat, x="x", y="y", hue="HGF", style="day", s=100, ax=ax)
+def base_scheme(
+    ax: plt.Axes,
+    scatterplot: bool = True
+) -> None:
+    if scatterplot:
+        dat = pd.DataFrame({
+            "x": np.array(([0] * 4 + [1] * 4) * 2) + np.tile(0.1 * np.cos(np.pi * np.linspace(1/6, 10/6, 4)), 4),
+            "y": np.array([0] * 8 + [1] * 8) + np.tile(0.1 * np.sin(np.pi * np.linspace(1/6, 10/6, 4)), 4),
+            "day": np.array((["2"] * 4 + ["7"] * 4) * 2),
+            "HGF": np.array(["–"] * 8 + ["+"] * 8)
+        })
+        sns.scatterplot(dat, x="x", y="y", hue="HGF", style="day", s=100, ax=ax)
+        ax.get_legend().remove()
     ax.set_xlim([-.3, 1.3]), ax.set_ylim([-.3, 1.3])
     ax.set(xlabel="Time Course", ylabel="Experimental Condition")
     ax.set_xticks([0, 1], ["day2", "day7"])
     ax.set_yticks([0, 1], ["control", "HGF+"])
-    ax.get_legend().remove()
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
 
@@ -124,6 +128,56 @@ def time_variation(
     return fig, ax
 
 
+def analogical(
+    figsize: tuple
+) -> tuple:
+    fig, ax = plt.subplots(figsize=figsize)
+    base_scheme(ax, scatterplot=False)
+    args = dict(
+        ha="center", va="center", fontdict={"size": "large"}
+    )
+    plt.rc('text', usetex=True)
+    plt.rc('text.latex', preamble=r'\usepackage{bm}')
+
+    ax.text(0, 0, r"$\bm{C}$", c="C0", **args)
+    ax.text(1, 0, r"$\bm{C}+\bm{t}$", c="C0", **args)
+    ax.text(0, 1, r"$\bm{C}+\bm{h}(2)$", c="C1", **args)
+    ax.text(
+        1, 1, 
+        r"$\bm{C}+\bm{h}(2)+\bm{t^*}\\=\bm{C}+\bm{t}+\bm{h}(7)$", 
+        c="C1", **args
+    )
+    ax.text(.5, 1.05, r"$+\bm{t^*}$", c=".2", **args)
+    ax.text(.5, .05, r"$+\bm{t}$", c=".2", **args)
+    ax.text(
+        -.01, .5, r"$+\bm{h}(2)$", c=".2",
+        ha="right", va="center", fontdict={"size": "large"}
+    )
+    ax.text(
+        1.01, .5, r"$+\bm{h}(7)$", c=".2",
+        ha="left", va="center", fontdict={"size": "large"}
+    )
+    ax.text(
+        .5, .5,
+        r"$\mathsf{Questions}\\$" \
+        + r"$1)\; \bm{t}\propto\bm{t^*}\;\mathsf{???}\\$" \
+        + r"$2)\; \bm{h}(2)\approx\bm{h}(7)\;\mathsf{???}$",
+        **args, c=".2",
+    )
+    as2 = {
+        "arrowstyle": "-|>",
+        "connectionstyle": "arc3",
+        "color": ".2"
+    }
+    ax.annotate('', xy=(.7, 1), xytext=(.3, 1), arrowprops=as2)
+    ax.annotate('', xy=(.7, 0), xytext=(.3, 0), arrowprops=as2)
+    ax.annotate('', xy=(0, .7), xytext=(0, .3), arrowprops=as2)
+    ax.annotate('', xy=(1, .7), xytext=(1, .3), arrowprops=as2)
+
+    plt.rc('text', usetex=False)
+    return fig, ax
+
+
 class Artist:
     def __init__(self, out: str = "/home/jovyan/out", args: dict = {}):
         self.out = out
@@ -152,6 +206,14 @@ class Artist:
     ):
         fig, _ = time_variation(figsize=figsize, cm=cm, smoothness=smoothness)
         fig.savefig(f"{self.out}/time_variation.png", **kwarg_savefig)
+
+
+    def analogical_schematic(
+        self,
+        figsize: tuple = (4, 4)
+    ):
+        fig, _ = analogical(figsize=figsize)
+        fig.savefig(f"{self.out}/analogical_schematic.png", **kwarg_savefig)
 
 
     def close(self) -> None:
