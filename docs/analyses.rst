@@ -8,3 +8,8 @@ Graphical Schematics
 
     jupyternb/artist
 
+
+Utility Functions & Classes
+---------------------------
+
+    jupyternb/suematsudata
