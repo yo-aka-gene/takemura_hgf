@@ -5,7 +5,7 @@ RUN pip install jupyterlab
 RUN jupyter serverextension enable --py jupyterlab
 
 WORKDIR $HOME
-RUN mkdir code data out tools
+RUN mkdir code data docs out tools
 
 EXPOSE 8888
 VOLUME ["/home/jovyan/code"]
