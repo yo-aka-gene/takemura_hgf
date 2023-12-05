@@ -13,7 +13,7 @@
    :maxdepth: 2
    :caption: Contents:
    
-   readme
+   README
    analyses
 
 
