@@ -6,7 +6,7 @@ Docmumentation of takemura_hgf repository
 =========================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents:
    
    ../README
