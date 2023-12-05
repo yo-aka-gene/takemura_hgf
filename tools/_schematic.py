@@ -161,7 +161,7 @@ def analogical(
         .5, .5,
         r"$\mathsf{Questions}\\$" \
         + r"$1)\; \bm{t}\propto\bm{t^*}\;\mathsf{???}\\$" \
-        + r"$2)\; \bm{h}(2)\approx\bm{h}(7)\;\mathsf{???}$",
+        + r"$2)\; \bm{h}(2)\propto\bm{h}(7)\;\mathsf{???}$",
         **args, c=".2",
     )
     as2 = {
