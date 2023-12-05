@@ -35,6 +35,7 @@ html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
 htmlhelp_basename = 'takemura_hgf_doc'
 html_logo = "_static/horizontal_logo.png"
+html_theme_options = {"navigation_depth": 5, "logo_only": True}
 master_doc = 'index'
 latex_documents = [
     (master_doc, 'takemurahgf.tex',
