@@ -28,7 +28,7 @@
     ```
     sh init.sh
     ```
-    **Note**: Our docker container will occupy `localhost:8880`
+    **Note**: Our docker container will occupy `localhost:8008`
 - password for the JupyterLab server is `jupyter`
 ### 3. Run codes
 - to reproduce all outputs at a time with a pipeline, run codes in `/home/jovyan/code/experiment_execution.ipynb`
