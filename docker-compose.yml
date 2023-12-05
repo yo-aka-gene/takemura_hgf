@@ -3,12 +3,14 @@ services:
   jupyterlab:
     build:
       context: .
+    container_name: CONTAINER_NAME
     user: root
     ports:
       - "8008:8888"
     volumes:
       - "./code:/home/jovyan/code"
       - "./data:/home/jovyan/data"
+      - "./docs:/home/jovyan/docs"
       - "./out:/home/jovyan/out"
       - "./tools:/home/jovyan/tools"
     environment:
