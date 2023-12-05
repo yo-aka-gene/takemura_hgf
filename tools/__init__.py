@@ -35,3 +35,6 @@ __all__ = [
     "metapipeline",
     "Artist",
 ]
+
+__author__ = """Yuji Okano"""
+__version__ = "presubmission"
