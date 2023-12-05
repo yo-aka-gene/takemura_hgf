@@ -163,7 +163,7 @@ cython_debug/
 .DS_Store
 
 # output
-*.png
+/out/*.png
 
 # dataset
 *.pkl
