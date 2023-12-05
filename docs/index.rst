@@ -1,13 +1,9 @@
 .. image:: ./_static/banner.png
     :align: center
 
-.. |logo| image:: https://raw.githubusercontent.com/yo-aka-gene/takemura_hgf/main/docs/_static/logo.png
-    :width: 130px
 
-| 
-
-|logo| Documentation
-====================
+Docmumentation of takemura_hgf repository
+=========================================
 
 .. toctree::
    :maxdepth: 2
