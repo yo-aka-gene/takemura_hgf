@@ -9,7 +9,7 @@ Docmumentation of takemura_hgf repository
    :maxdepth: 2
    :caption: Contents:
    
-   README
+   ../README
    analyses
 
 

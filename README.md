@@ -1,4 +1,4 @@
-# takemura_hgf
+# README: takemura_hgf
 [![DOI](https://img.shields.io/badge/DOI-InPreparation-blue.svg?longCache=true)]()
 [![PMID](https://img.shields.io/badge/PMID-InPreparation-orange.svg?longCache=true)]()
 [![Documentation Status](https://readthedocs.org/projects/takemura-hgf/badge/?version=latest)](https://takemura-hgf.readthedocs.io/en/latest/?badge=latest)
