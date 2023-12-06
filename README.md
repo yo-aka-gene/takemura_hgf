@@ -22,7 +22,7 @@
 - git
 
 ### 2. How to reproduce the virtual env
-- clone this repository
+- clone [this repository](https://github.com/yo-aka-gene/takemura_hgf)
 - activate the virtual env by runnning `init.sh` in `takemura_hgf` directory. This shell script will automatically setup the virtual env and connect to it
 
     ```
