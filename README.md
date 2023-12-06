@@ -13,7 +13,7 @@
 ## Documentation
 <img src="https://raw.githubusercontent.com/yo-aka-gene/takemura_hgf/main/docs/_static/logo.png" width="150px"> 
 
-- Documentation and example codes (jupyter notebooks) are available in [https://readthedocs.org/projects/takemura-hgf/](https://readthedocs.org/projects/takemura-hgf/)
+- Documentation and example codes (jupyter notebooks) are available in [https://takemura-hgf.readthedocs.io/en/latest/index.html](https://takemura-hgf.readthedocs.io/en/latest/index.html)
 
 ## Start Guide
 ### 1. Environment Preference
@@ -32,7 +32,7 @@
 - password for the JupyterLab server is `jupyter`
 ### 3. Run codes
 - to reproduce all outputs at a time with a pipeline, run codes in `/home/jovyan/code/experiment_execution.ipynb`
-- If you are interested in taking a detailed look at each analysis, we have [online documentation](https://readthedocs.org/projects/takemura-hgf/) and the same ipynb files are in `/home/jovyan/code/jupyternb` as well.
+- If you are interested in taking a detailed look at each analysis, we have [online documentation](https://takemura-hgf.readthedocs.io/en/latest/index.html) and the same ipynb files are in `/home/jovyan/code/jupyternb` as well.
 
 ## Contact
 - Corresponding Author: [hidokano@keio.jp](mailto:hidokano@keio.jp)
