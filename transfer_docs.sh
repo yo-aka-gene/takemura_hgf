@@ -14,3 +14,4 @@ git push origin main
 
 cd $HGF_DIR
 cp docs/jupyternb/README.ipynb docs/jupyternb/$NB_NAME
+cp ~/Desktop/hgf_manuscript/hgf_docs/$NB_NAME docs/jupyternb/$(basename $NB_NAME .ipynb)_privatedoc.ipynb

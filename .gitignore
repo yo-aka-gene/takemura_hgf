@@ -170,3 +170,6 @@ cython_debug/
 
 # Docker
 docker-compose.yml
+
+# Docs not to show in public repo
+*privatedoc.ipynb
