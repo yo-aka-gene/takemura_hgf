@@ -6,10 +6,10 @@
 NB_NAME = $(basename $1)
 
 mv $1 ~/Desktop/hgf_manuscript/hgf_docs
-cp $(basename $PWD)/docs/jupyternb/README.ipynb $1
-git add $1
-git commit -m ":construction::books: add tentative doc ($(basename $1))"
+cp $(basename $PWD)/docs/jupyternb/README.ipynb $(basename $PWD)/docs/jupyternb/$NB_NAME
+git add $(basename $PWD)/docs/jupyternb/$NB_NAME
+git commit -m ":construction::books: add tentative doc ($NB_NAME)"
 cd ~/Desktop/hgf_manuscript/hgf_docs
-git add ~/Desktop/hgf_manuscript/hgf_docs/$(basename $1)
-git commit -m ":sparkles: add $(basename $1)"
+git add ~/Desktop/hgf_manuscript/hgf_docs/$NB_NAME
+git commit -m ":sparkles: add $NB_NAME"
 git push origin main
