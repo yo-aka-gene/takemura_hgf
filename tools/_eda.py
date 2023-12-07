@@ -46,7 +46,7 @@ class EDA:
         ax.legend(bbox_to_anchor=(1, .5), loc="center left")
         ax.set_xlabel(f"PC1 ({(self.model.explained_variance_ratio_[0] * 100).round(3)}%)")
         ax.set_ylabel(f"PC2 ({(self.model.explained_variance_ratio_[1] * 100).round(3)}%)")
-        ax.set(title=r"RNA-seq data ($n=4\times4$)"+"\n(Suematsu Y, et al., $Inflamm\; Regener$, 2023)")
+        ax.set(title=r"RNA-seq data ($n=4\times4$)"+"\n(Suematsu Y, et al., $Inflamm\; Regen.$, 2023)")
         fig.savefig(f"{self.out}/pca.png", **kwarg_savefig)
 
 
