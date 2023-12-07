@@ -96,7 +96,7 @@ def schematic(
     ax[0].annotate('', xy=(1, .2), xytext=(1, .8), arrowprops=as1)
     ax[0].text(.5, 1, "upregulated", horizontalalignment="center", verticalalignment="center", c="r")
     ax[0].text(.5, 0, "downregulated", horizontalalignment="center", verticalalignment="center", c="b")
-    ax[0].set(title="Overview of HGF's Effect\n(Suematsu Y, et al., $Inflamm\; Regener$, 2023)")
+    ax[0].set(title="Overview of HGF's Effect\n(Suematsu Y, et al., $Inflamm\; Regen.$, 2023)")
     
     return fig, ax
 
