@@ -11,7 +11,7 @@ kwarg_savefig = {
 }
 
 
-eda_longitudal_args = {
+eda_longitudinal_args = {
     "split_by_days": True,
     "set_labels": ("HGF+", "control"),
     "dim_idx": 0,
@@ -21,7 +21,7 @@ eda_longitudal_args = {
 }
 
 
-sgoa_longitudal_args = {
+sgoa_longitudinal_args = {
     "palettes": ("magma", "cividis"),
     "split_by_days": True
 }
