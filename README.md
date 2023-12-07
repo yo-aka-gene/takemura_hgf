@@ -17,22 +17,12 @@
 
 ## Start Guide
 ### 1. Environment Preference
-- MacOS
-- Docker Desktop
-- git
+- **WIP**: we will add descriptions  when our manuscripts got accepted!
 
 ### 2. How to reproduce the virtual env
-- clone [this repository](https://github.com/yo-aka-gene/takemura_hgf)
-- activate the virtual env by runnning `init.sh` in `takemura_hgf` directory. This shell script will automatically setup the virtual env and connect to it
-
-    ```
-    sh init.sh
-    ```
-    **Note**: Our docker container will occupy `localhost:8008`
-- password for the JupyterLab server is `jupyter`
+- **WIP**: we will add descriptions  when our manuscripts got accepted!
 ### 3. Run codes
-- to reproduce all outputs at a time with a pipeline, run codes in `/home/jovyan/code/experiment_execution.ipynb`
-- If you are interested in taking a detailed look at each analysis, we have [online documentation](https://takemura-hgf.readthedocs.io/en/latest/index.html) and the same ipynb files are in `/home/jovyan/code/jupyternb` as well.
+- **WIP**: we will add descriptions  when our manuscripts got accepted!
 
 ## Contact
 - Corresponding Author: [hidokano@keio.jp](mailto:hidokano@keio.jp)
