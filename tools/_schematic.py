@@ -220,6 +220,18 @@ class Artist:
         plt.close()
 
 
+    def _pipe(
+        self,
+        operation: str,
+        close: bool,
+        adgile: bool
+    ) -> None:
+        if not (adgile and artist_pipeline_adgile[operation](self.out)):
+            eval(f"self.{operation}()")
+            self.close() if close else None
+
+
+
     def pipeline(
         self,
         pipe: list = artist_pipeline_adgile.keys(),
@@ -227,7 +239,10 @@ class Artist:
         adgile: bool = False
     ) -> None:
         pipe = self.fetch("pipe", pipe)
-        for operation in pipe:
-            if not (adgile and artist_pipeline_adgile[operation](self.out)):
-                eval(f"self.{operation}()")
-                self.close() if close else None
+        np.array([
+            self._pipe(
+                operation=operation,
+                close=close,
+                adgile=adgile
+            )for operation in pipe
+        ])
