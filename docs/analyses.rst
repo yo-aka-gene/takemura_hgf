@@ -21,3 +21,4 @@ Utility Functions & Classes
 .. nbgallery::
 
     jupyternb/suematsudata
+    jupyternb/preference
