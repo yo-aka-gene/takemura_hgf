@@ -22,3 +22,4 @@ Utility Functions & Classes
 
     jupyternb/suematsudata
     jupyternb/preference
+    jupyternb/version_config
