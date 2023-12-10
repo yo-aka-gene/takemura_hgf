@@ -67,8 +67,8 @@ class StratifiedGOAnalysis:
 
     def title_setter(self, split_by_days: bool = False) -> dict:
         return {
-            "up": "upregulated GO terms through time cource",
-            "down": "downregulated GO terms through time cource"
+            "up": "upregulated GO terms through time course",
+            "down": "downregulated GO terms through time course"
         } if split_by_days else {
             "up": "upregulated GO terms by HGF",
             "down": "downregulated GO terms by HGF"
