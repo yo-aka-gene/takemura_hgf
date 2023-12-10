@@ -13,6 +13,7 @@ Data Analyses
 .. nbgallery::
 
     jupyternb/eda
+    jupyternb/sgoa
 
 
 Utility Functions & Classes
