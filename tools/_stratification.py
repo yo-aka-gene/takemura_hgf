@@ -242,12 +242,11 @@ class StratifiedGOAnalysis:
     def go_venn(
         self,
         layout: tuple = (1, 2),
-        figsize: tuple = (6, 3),
-        top: int = None
+        figsize: tuple = (6, 3)
     ) -> None:
         fig, ax = plt.subplots(*layout, figsize=figsize)
-        self.go_venn_base(category="up", top=top, ax=ax[0], palette=self.venn3_palette)
-        self.go_venn_base(category="down", top=top, ax=ax[1], palette=self.venn3_palette)
+        self.go_venn_base(category="up", top=None, ax=ax[0], palette=self.venn3_palette)
+        self.go_venn_base(category="down", top=None, ax=ax[1], palette=self.venn3_palette)
         [a.set(title=f"{k}regulated GO terms (all)") for a, k in zip(ax, self.result)]
         suffix = "_".join(list(self.result["up"].keys())[::2])
         fig.savefig(f"{self.out}/go_venn_all_{suffix}.png", **kwarg_savefig)
