@@ -5,11 +5,6 @@
 
 - This is a repository for analysis codes in "$article\;in\;preparation$"
 
-## Authors
-- Yuji Okano
-- Yoshitaka Kase
-- [Hideyuki Okano](mailto:hidokano@keio.jp)
-
 ## Documentation
 <img src="https://raw.githubusercontent.com/yo-aka-gene/takemura_hgf/main/docs/_static/logo.png" width="150px"> 
 
@@ -23,6 +18,3 @@
 - **WIP**: we will add descriptions  when our manuscripts got accepted!
 ### 3. Run codes
 - **WIP**: we will add descriptions  when our manuscripts got accepted!
-
-## Contact
-- Corresponding Author: [hidokano@keio.jp](mailto:hidokano@keio.jp)
