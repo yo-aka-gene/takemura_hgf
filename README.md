@@ -12,9 +12,9 @@
 
 ## Start Guide
 ### 1. Environment Preference
-- **WIP**: we will add descriptions  when our manuscripts got accepted!
+- **WIP**: we will add descriptions  when our manuscripts are accepted!
 
 ### 2. How to reproduce the virtual env
-- **WIP**: we will add descriptions  when our manuscripts got accepted!
+- **WIP**: we will add descriptions  when our manuscripts are accepted!
 ### 3. Run codes
-- **WIP**: we will add descriptions  when our manuscripts got accepted!
+- **WIP**: we will add descriptions  when our manuscripts are accepted!
