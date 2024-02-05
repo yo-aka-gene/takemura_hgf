@@ -360,9 +360,10 @@ tidyr (>= 0.8.0), tidyselect, vctrs",NA,"compiler, covr, ggplot2, testthat (>= 3
 "nycflights13","nycflights13","/opt/conda/lib/R/library","1.0.2",NA,"R (>= 3.2)","tibble",NA,"dplyr",NA,"CC0",NA,NA,NA,NA,"no","4.2.1"
 "openssl","openssl","/opt/conda/lib/R/library","2.0.4",NA,NA,"askpass",NA,"curl, testthat (>= 2.1.0), digest, knitr, rmarkdown,
 jsonlite, jose, sodium",NA,"MIT + file LICENSE",NA,NA,NA,NA,"yes","4.2.1"
-"optparse","optparse","/opt/conda/lib/R/library","1.7.3",NA,"R (>= 3.6.0)","methods, getopt (>= 1.20.2)",NA,"knitr (>= 1.15.19), stringr, testthat",NA,"GPL (>= 2)",NA,NA,NA,NA,"no","4.2.2"
+"optparse","optparse","/opt/conda/lib/R/library","1.7.4",NA,"R (>= 3.6.0)","methods, getopt (>= 1.20.2)",NA,"knitr (>= 1.15.19), stringr, testthat",NA,"GPL (>= 2)",NA,NA,NA,NA,"no","4.2.2"
 "org.Hs.eg.db","org.Hs.eg.db","/opt/conda/lib/R/library","3.16.0",NA,"R (>= 2.7.0), methods, AnnotationDbi (>= 1.59.1)",NA,NA,"DBI, annotate, RUnit",NA,"Artistic-2.0",NA,NA,NA,NA,"no","4.2.2"
 "org.Mm.eg.db","org.Mm.eg.db","/opt/conda/lib/R/library","3.16.0",NA,"R (>= 2.7.0), methods, AnnotationDbi (>= 1.59.1)",NA,NA,"DBI, annotate, RUnit",NA,"Artistic-2.0",NA,NA,NA,NA,"no","4.2.2"
+"org.Rn.eg.db","org.Rn.eg.db","/opt/conda/lib/R/library","3.16.0",NA,"R (>= 2.7.0), methods, AnnotationDbi (>= 1.59.1)",NA,NA,"DBI, annotate, RUnit",NA,"Artistic-2.0",NA,NA,NA,NA,"no","4.2.2"
 "parallel","parallel","/opt/conda/lib/R/library","4.2.2","base",NA,"tools, compiler",NA,"methods","snow, nws, Rmpi","Part of R 4.2.2",NA,NA,NA,NA,"yes","4.2.2"
 "parallelly","parallelly","/opt/conda/lib/R/library","1.32.1",NA,NA,"parallel, tools, utils",NA,NA,NA,"LGPL (>= 2.1)",NA,NA,NA,NA,"no","4.2.1"
 "parsnip","parsnip","/opt/conda/lib/R/library","1.0.3",NA,"R (>= 2.10)","cli, dplyr (>= 0.8.0.1), generics (>= 0.1.2), ggplot2,
