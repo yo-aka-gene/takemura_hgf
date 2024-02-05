@@ -331,6 +331,7 @@ class StratifiedGOAnalysis:
         hspace: float = .2,
         palette: tuple = ("y", "grey", "m"),
         small_title_fontsize: bool = False,
+        sci: tuple = None
     ) -> tuple:
         d_n_col = {3: 3, 8: 4, 15: 5, 18: 6, 21: 7, 24: 6, 35: 7, 48: 8}
         l = len(query)
@@ -358,6 +359,10 @@ class StratifiedGOAnalysis:
                 ylabel="Num. of genes" if category is None else f"Num. of {category}. genes", 
                 xlabel=""
             )
+            if sci is not None:
+                a.ticklabel_format(
+                    axis="y", style="sci", scilimits=sci, useMathText=True
+                )
             if small_title_fontsize:
                 a.set_title(fmt_go_terms(term, thresh=40), fontsize="small")
             else:
@@ -369,8 +374,10 @@ class StratifiedGOAnalysis:
         top: int = 30,
         filter_id: int = 111,
         plotsize: float = 3,
-        wspace: float = .3,
+        wspace: float = .4,
         hspace: float = .3,
+        sci: tuple = None,
+        suptitle: bool = True
     ) -> None:
         filter_id = 10 if self.split_by_days else filter_id
         for category in self.data:
@@ -382,8 +389,13 @@ class StratifiedGOAnalysis:
             fig, _ = self.go2gene_n_viz_base(
                 query=query, hit_dict=hit_dict, plotsize=plotsize,
                 wspace=wspace, hspace=hspace, palette=self.barplot_palette,
-                small_title_fontsize=self.split_by_days
+                small_title_fontsize=self.split_by_days, sci=sci
             )
+            if suptitle:
+                fig.suptitle(
+                    f"{category}regulated GO terms",
+                    verticalalignment="center", y=.93
+                )
             suffix = "_".join(list(self.result["up"].keys())[::2])
             n_top = "all" if top is None else f"top{top}"
             fig.savefig(
@@ -397,8 +409,10 @@ class StratifiedGOAnalysis:
         top: int = 30,
         filter_id: int = 111,
         plotsize: float = 3,
-        wspace: float = .3,
+        wspace: float = .4,
         hspace: float = .3,
+        sci: tuple = None,
+        suptitle: bool = True
     ) -> None:
         filter_id = 10 if self.split_by_days else filter_id
         for category in self.data:
@@ -410,8 +424,13 @@ class StratifiedGOAnalysis:
             fig, _ = self.go2gene_n_viz_base(
                 query=query, hit_dict=hit_dict, plotsize=plotsize,
                 wspace=wspace, hspace=hspace, palette=self.barplot_palette,
-                small_title_fontsize=self.split_by_days
+                small_title_fontsize=self.split_by_days, sci=sci
             )
+            if suptitle:
+                fig.suptitle(
+                    f"{category}regulated GO terms",
+                    verticalalignment="center", y=.93
+                )
             suffix = "_".join(list(self.result["up"].keys())[::2])
             n_top = "all" if top is None else f"top{top}"
             fig.savefig(
