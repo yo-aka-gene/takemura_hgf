@@ -210,7 +210,7 @@ class EDA:
             footnote = "\n".join(
                 [
                     f"{l}: {' vs '.join(pair(l)[::-1] if flip else pair(l))}" for l in set_labels
-                ] + [f"{intersection_name(set_labels)}: " + ' $\cap$ '.join(set_labels)]
+                ] + [f"{intersection_name(set_labels)}: intersection of {' & '.join(set_labels)}"]
             )
             ax.text(
                 0, -.9, footnote, size="x-small",
