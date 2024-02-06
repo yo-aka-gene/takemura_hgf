@@ -8,7 +8,8 @@ from ._data_loader import SuematsuData
 from ._go import gprofiler, get_go
 from ._preference import (
     kwarg_savefig, venn3_palette_alias,
-    sgoa_pipeline_adgile, is_skippable
+    sgoa_pipeline_adgile, is_skippable,
+    intersection_name
 )
 
 
@@ -43,23 +44,23 @@ class StratifiedGOAnalysis:
         return {
             "up": {
                 "HGF+": upa.loc[[v for v in upa.index if v not in upb.index]],
-                "com.": upa.loc[[v for v in upa.index if v in upb.index]],
+                intersection_name(split_by_days): upa.loc[[v for v in upa.index if v in upb.index]],
                 "control": upb.loc[[v for v in upb.index if v not in upa.index]],
             },
             "down": {
                 "HGF+": downa.loc[[v for v in downa.index if v not in downb.index]],
-                "com.": downa.loc[[v for v in downa.index if v in downb.index]],
+                intersection_name(split_by_days): downa.loc[[v for v in downa.index if v in downb.index]],
                 "control": downb.loc[[v for v in downb.index if v not in downa.index]],
             },
         } if split_by_days else {
             "up": {
                 "day2": upa.loc[[v for v in upa.index if v not in upb.index]],
-                "Const.": upa.loc[[v for v in upa.index if v in upb.index]],
+                intersection_name(split_by_days): upa.loc[[v for v in upa.index if v in upb.index]],
                 "day7": upb.loc[[v for v in upb.index if v not in upa.index]],
             },
             "down": {
                 "day2": downa.loc[[v for v in downa.index if v not in downb.index]],
-                "Const.": downa.loc[[v for v in downa.index if v in downb.index]],
+                intersection_name(split_by_days): downa.loc[[v for v in downa.index if v in downb.index]],
                 "day7": downb.loc[[v for v in downb.index if v not in downa.index]],
             },
         }

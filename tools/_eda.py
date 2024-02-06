@@ -6,7 +6,7 @@ import seaborn as sns
 from sklearn.decomposition import PCA
 from ._cohens_d import cohens_d, gene_selection
 from ._data_loader import SuematsuData
-from ._preference import kwarg_savefig, eda_pipeline_adgile, is_skippable
+from ._preference import kwarg_savefig, eda_pipeline_adgile, is_skippable, intersection_name
 
 
 class EDA:
@@ -207,11 +207,13 @@ class EDA:
             pair = lambda label: [
                 v for v in self.data.data.groupby(self.data.group).count().filter(axis=0, regex=label).index
             ]
-            footnote = "\n".join([
-                f"{l}: {' vs '.join(pair(l)[::-1] if flip else pair(l))}" for l in set_labels
-            ])
+            footnote = "\n".join(
+                [
+                    f"{l}: {' vs '.join(pair(l)[::-1] if flip else pair(l))}" for l in set_labels
+                ] + [f"{intersection_name(set_labels)}: " + ' $\cap$ '.join(set_labels)]
+            )
             ax.text(
-                0, -.8, footnote, size="x-small",
+                0, -.9, footnote, size="x-small",
                 horizontalalignment="center", verticalalignment="center"
             )
         return ax

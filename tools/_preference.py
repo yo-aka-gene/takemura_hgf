@@ -1,3 +1,4 @@
+from typing import Union
 import glob
 import numpy as np
 
@@ -59,6 +60,17 @@ venn3_palette_alias = {
     1: venn3_palette1,
     2: venn3_palette2
 }
+
+
+def intersection_name(arg: Union[tuple, bool]) -> str:
+    assert isinstance(arg, (bool, tuple)), \
+        f"Invalid input type: expected tuple or bool, got {arg}[{type(arg)}]"
+    namespace = [
+        "Const.", #intersection of day2 and day7
+        "com.", #intersection of HGF+ and control
+    ]
+    arg = "HGF+" in "".join(arg) if isinstance(arg, tuple) else arg
+    return namespace[arg]
 
 
 def path_exists(regex: str, require: int = None) -> bool:
