@@ -182,7 +182,8 @@ class EDA:
         d: float = .8,
         neg: bool = False,
         flip: bool = False,
-        set_colors: tuple = ("C0", "C2", "C1")
+        set_colors: tuple = ("C0", "C2", "C1"),
+        footnote: bool = False
     ) -> None:
         if ax is None:
             _, ax = plt.subplots()
@@ -202,6 +203,17 @@ class EDA:
         )
         [v.get_patch_by_id(p).set_color(c) for p, c in zip(["10", "01", "11"], set_colors)]
         ax.set(title=f"{'down' if neg else 'up'}regulated genes")
+        if footnote:
+            pair = lambda label: [
+                v for v in self.data.data.groupby(self.data.group).count().filter(axis=0, regex=label).index
+            ]
+            footnote = "\n".join([
+                f"{l}: {' vs '.join(pair(l)[::-1] if flip else pair(l))}" for l in set_labels
+            ])
+            ax.text(
+                0, -.8, footnote, size="x-small",
+                horizontalalignment="center", verticalalignment="center"
+            )
         return ax
 
 
@@ -211,14 +223,15 @@ class EDA:
         figsize: tuple = (6, 3),
         set_labels: tuple = ("day2", "day7"),
         set_colors: tuple = ("y", "m", "grey"),
-        flip: bool = False
+        flip: bool = False,
+        footnote: bool = True
     ) -> None:
         fig, ax = plt.subplots(*layout, figsize=figsize)
         set_labels = self.fetch("set_labels", set_labels)
         set_colors = self.fetch("set_colors", set_colors)
         flip = self.fetch("flip", flip)
-        self.gr_venn(set_labels=set_labels, ax=ax[0], set_colors=set_colors, flip=flip)
-        self.gr_venn(set_labels=set_labels, ax=ax[1], neg=True, set_colors=set_colors, flip=flip)
+        self.gr_venn(set_labels=set_labels, ax=ax[0], set_colors=set_colors, flip=flip, footnote=footnote)
+        self.gr_venn(set_labels=set_labels, ax=ax[1], neg=True, set_colors=set_colors, flip=flip, footnote=footnote)
         fig.savefig(f"{self.out}/venn_{set_labels[0]}_{set_labels[1]}.png", **kwarg_savefig)
 
 
