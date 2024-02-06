@@ -344,7 +344,7 @@ class StratifiedGOAnalysis:
             ax[i // n_cols, i % n_cols].axis("off") if i >= len(query) else None
         fig.subplots_adjust(wspace=wspace, hspace=hspace)
         for i, term in enumerate(query.index):
-            a = ax[i // n_cols, i % n_cols]
+            a = ax[i // n_cols, i % n_cols] if not n_rows == 1 else ax[i]
             dat = pd.DataFrame({
                 k: [len(d[d.GOALL == query.term_id[i]])] for k, d in hit_dict.items()
             }).T
@@ -378,7 +378,8 @@ class StratifiedGOAnalysis:
         wspace: float = .4,
         hspace: float = .3,
         sci: tuple = None,
-        suptitle: bool = True
+        suptitle: bool = True,
+        suptitle_y: float = .93
     ) -> None:
         filter_id = 10 if self.split_by_days else filter_id
         for category in self.data:
@@ -395,7 +396,8 @@ class StratifiedGOAnalysis:
             if suptitle:
                 fig.suptitle(
                     f"{category}regulated GO terms",
-                    verticalalignment="center", y=.93
+                    verticalalignment="center",
+                    y=suptitle_y
                 )
             suffix = "_".join(list(self.result["up"].keys())[::2])
             n_top = "all" if top is None else f"top{top}"
@@ -413,7 +415,8 @@ class StratifiedGOAnalysis:
         wspace: float = .4,
         hspace: float = .3,
         sci: tuple = None,
-        suptitle: bool = True
+        suptitle: bool = True,
+        suptitle_y: float = .93
     ) -> None:
         filter_id = 10 if self.split_by_days else filter_id
         for category in self.data:
@@ -430,7 +433,8 @@ class StratifiedGOAnalysis:
             if suptitle:
                 fig.suptitle(
                     f"{category}regulated GO terms",
-                    verticalalignment="center", y=.93
+                    verticalalignment="center",
+                    y=suptitle_y
                 )
             suffix = "_".join(list(self.result["up"].keys())[::2])
             n_top = "all" if top is None else f"top{top}"
