@@ -1,6 +1,6 @@
 # README: takemura_hgf
 [<img src="https://img.shields.io/badge/DOI-10.1186/s41232--024--00322--9-FAB70C?style=flat&logo=doi">](https://doi.org/10.1186/s41232-024-00322-9)
-[<img src="https://img.shields.io/badge/PMID-accepted-326599?style=flat&logo=pubmed">]()
+[<img src="https://img.shields.io/badge/PMID-38475915-326599?style=flat&logo=pubmed">](https://pubmed.ncbi.nlm.nih.gov/38475915/)
 [![Documentation Status](https://readthedocs.org/projects/takemura-hgf/badge/?version=latest)](https://takemura-hgf.readthedocs.io/en/latest/?badge=latest)
 [<img src="https://img.shields.io/badge/Documentation-takemura--hgf.rtfd.io-8CA1AF?style=flat&logo=readthedocs">](https://takemura-hgf.readthedocs.io/en/latest/)
 [<img src="https://img.shields.io/badge/Code_Examples-Jupyter_Notebook-F37626?style=flat&logo=jupyter">](https://takemura-hgf.readthedocs.io/en/latest/analyses.html)
